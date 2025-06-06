@@ -28,7 +28,7 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// std::unique_ptr<PlayerLoop> playerLoop = std::make_unique<PlayerLoop>();
 
 	// 初期化
-	if (!graphicApp->Init()) { return 1; }
+	if (!graphicApp->init()) { return 1; }
 	// StandardShaderResourceを取得
 	std::shared_ptr<ShaderResource> shaderResource = std::make_shared<ShaderResource>();
 	bool isComplete = shader->CreateStandardShader(
@@ -37,7 +37,7 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		shaderResource);
 	if (!isComplete) { return 1; }
 
-	spriteMesh->Init(shaderResource);
+	spriteMesh->init(shaderResource);
 
 	MSG hMsg = {};	// メッセージハンドルを初期化
 	float color = 0.0f;
@@ -55,9 +55,9 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		color = std::cos(time);
 		QueryPerformanceFrequency(&timeFrequency);	// FPS制御
 		QueryPerformanceCounter(&timeStart);		// FPS制御
-		graphicApp->RenderBegin(color, color, color, 1.0f);
-		spriteMesh->Rendering(spriteRenderer->GetOrCreateSprite(".\\Assets\\Sprite\\ColorfulSprite.png"));
-		graphicApp->RenderEnd();
+		graphicApp->renderBegin(color, color, color, 1.0f);
+		spriteMesh->rendering(spriteRenderer->getOrCreateSprite(".\\Assets\\Sprite\\ColorfulSprite.png"));
+		graphicApp->renderEnd();
 		FrameRate();
 	}
 

@@ -14,19 +14,21 @@
 
 struct TextureResource {
 public:
-	DirectX::TexMetadata Metadata;
-	DirectX::ScratchImage ScratchImage;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> ShaderResourceView;
+	DirectX::TexMetadata metadata;
+	DirectX::ScratchImage scratchImage;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> shaderResourceView;
 };
 
 class SpriteRenderer {
 public:
-	SpriteRenderer(Direct3D& system) : _system(system) {}
+	SpriteRenderer(Direct3D& system) : system(system) {}
 	~SpriteRenderer() {}
 
-	const TextureResource& GetOrCreateSprite(std::string path);
+	void createStandardSprite(std::string path);
+	const TextureResource& getOrCreateSprite(std::string path);
 
 private:
-	Direct3D& _system;
-	std::unordered_map<std::string, TextureResource> _textureResourceMap;
+	Direct3D& system;
+	TextureResource standardSprite;
+	std::unordered_map<std::string, TextureResource> textureResourceMap;
 };

@@ -13,17 +13,17 @@ bool Shader::CreateStandardShader(const std::string& vertexShaderPath, const std
 	}
 
 	// 頂点シェーダーを作成
-	CreateVertexShader(vertexShaderPath, *outShaderResource);
+	createVertexShader(vertexShaderPath, *outShaderResource);
 	// ピクセルシェーダーを作成
-	CreatePixcelShader(pixcelShaderPath, *outShaderResource);
+	createPixcelShader(pixcelShaderPath, *outShaderResource);
 
 	// StandardShaderの保存パスを記録
-	_standardShaderPath = vertexShaderPath;
-	_standardShaderPath.append("-");
-	_standardShaderPath.append(pixcelShaderPath);
+	standardShaderPath = vertexShaderPath;
+	standardShaderPath.append("-");
+	standardShaderPath.append(pixcelShaderPath);
 
 	// 管理権をマップに移す
-	_shaderResourceMap[_standardShaderPath] = *outShaderResource;
+	shaderResourceMap[standardShaderPath] = *outShaderResource;
 	return true;
 }
 
@@ -38,46 +38,46 @@ const ShaderResource& Shader::GetOrCreateShader(std::string vertexShaderPath = N
 	shaderKey.append(pixcelShaderName);
 
 	// 既に同じ組み合わせのシェーダーが作成されていた場合
-	if (_shaderResourceMap.contains(shaderKey)) {
+	if (shaderResourceMap.contains(shaderKey)) {
 		// 存在するシェーダーリソースを返す
-		return _shaderResourceMap[shaderKey];
+		return shaderResourceMap[shaderKey];
 	}
 
 	// StandardのShaderResourceをコピーする
-	ShaderResource shaderResource = _shaderResourceMap[_standardShaderPath];
+	ShaderResource shaderResource = shaderResourceMap[standardShaderPath];
 
 	/* 頂点シェーダーを作成 */
 	// 頂点シェーダーが指定されている場合
 	if (vertexShaderName != STANDARD_PATH_NAME) {
 		// 頂点シェーダーを作成
-		CreateVertexShader(vertexShaderPath, shaderResource);
+		createVertexShader(vertexShaderPath, shaderResource);
 	}
 	/* ピクセルシェーダーを作成 */
 	// ピクセルシェーダーが指定されている場合
 	if (pixcelShaderName != STANDARD_PATH_NAME) {
 		// ピクセルシェーダーを作成
-		CreatePixcelShader(pixcelShaderPath, shaderResource);
+		createPixcelShader(pixcelShaderPath, shaderResource);
 	}
 
 	// 管理権をマップに移す
-	_shaderResourceMap[shaderKey] = std::move(shaderResource);
-	return _shaderResourceMap[shaderKey];
+	shaderResourceMap[shaderKey] = std::move(shaderResource);
+	return shaderResourceMap[shaderKey];
 }
 
-void Shader::CreateVertexShader(const std::string& path, ShaderResource& shaderResource) {
+void Shader::createVertexShader(const std::string& path, ShaderResource& shaderResource) {
 	// 正常終了チェック
 	HRESULT hr = S_OK;
 	// ファイルの拡張子を取得
 	size_t dotSplit = path.find_last_of('.');
 	std::string extension = path.substr(dotSplit + 1);
-	std::wstring vertexShader = ConvertWstring(path);
+	std::wstring vertexShader = convertWstring(path);
 
 	// 読み込むファイルの拡張子がhlslの場合
 	if (extension == "hlsl") {
 		ComPtr<ID3DBlob> vertexShaderBlob = nullptr;
 
 		// hlslをコンパイルする
-		hr = CompileShaderFromFile(
+		hr = compileShaderFromFile(
 			vertexShader.c_str(),								// ファイルパス
 			"main",								// エントリーポイントの名前
 			"vs_5_0",							// シェーダーのバージョン
@@ -86,59 +86,59 @@ void Shader::CreateVertexShader(const std::string& path, ShaderResource& shaderR
 		if (FAILED(hr)) { return; }
 
 		// 頂点シェーダーの作成
-		hr = _system.GetDevice()->CreateVertexShader(
+		hr = system.get_device()->CreateVertexShader(
 			vertexShaderBlob->GetBufferPointer(),
 			vertexShaderBlob->GetBufferSize(),
 			nullptr,
-			shaderResource.VertexSahder.GetAddressOf());
+			shaderResource.vertexSahder.GetAddressOf());
 		if (FAILED(hr)) { return; }
 
 		// インプットレイアウトの作成
-		hr = _system.GetDevice().Get()->CreateInputLayout(
-			_vertexDesc,
-			ARRAYSIZE(_vertexDesc),
+		hr = system.get_device().Get()->CreateInputLayout(
+			vertexDesc,
+			ARRAYSIZE(vertexDesc),
 			vertexShaderBlob.Get()->GetBufferPointer(),
 			vertexShaderBlob.Get()->GetBufferSize(),
-			shaderResource.VertexLayout.GetAddressOf());
+			shaderResource.vertexLayout.GetAddressOf());
 
 		vertexShaderBlob.Reset();
 		if (FAILED(hr)) { return; }
 	}
 	else if (extension == "cso") {	// 読み込むファイルの拡張子がcsoの場合
-		auto result = LoadCSOFile(vertexShader.c_str());	// 戻り値の型が長いため省略
+		auto result = loadCSOFile(vertexShader.c_str());	// 戻り値の型が長いため省略
 		auto& [csoBuffer, csoSize] = *result;
 		// 頂点シェーダーの作成
-		hr = _system.GetDevice().Get()->CreateVertexShader(
+		hr = system.get_device().Get()->CreateVertexShader(
 			csoBuffer.get(),
 			csoSize,
 			nullptr,
-			shaderResource.VertexSahder.GetAddressOf());
+			shaderResource.vertexSahder.GetAddressOf());
 
 		if (FAILED(hr)) { return; }
 
 		// インプットレイアウトの作成
-		hr = _system.GetDevice().Get()->CreateInputLayout(
-			_vertexDesc,
-			ARRAYSIZE(_vertexDesc),
+		hr = system.get_device().Get()->CreateInputLayout(
+			vertexDesc,
+			ARRAYSIZE(vertexDesc),
 			csoBuffer.get(),
 			csoSize,
-			shaderResource.VertexLayout.GetAddressOf());
+			shaderResource.vertexLayout.GetAddressOf());
 		if (FAILED(hr)) { return; }
 	}
 }
 
-void Shader::CreatePixcelShader(const std::string& path, ShaderResource& shaderResource) {
+void Shader::createPixcelShader(const std::string& path, ShaderResource& shaderResource) {
 	HRESULT hr = S_OK;
 	// ファイルの拡張子を取得
 	size_t dotSplit = path.find_last_of('.');
 	std::string extension = path.substr(dotSplit + 1);
-	std::wstring pixcelShader = ConvertWstring(path);
+	std::wstring pixcelShader = convertWstring(path);
 
 	// 読み込むファイルの拡張子がhlslの場合
 	if (extension == "hlsl") {
 		ComPtr<ID3DBlob> pixcelShaderBlob = nullptr;
 
-		hr = CompileShaderFromFile(
+		hr = compileShaderFromFile(
 			pixcelShader.c_str(),
 			"main",
 			"ps_5_0",
@@ -147,31 +147,31 @@ void Shader::CreatePixcelShader(const std::string& path, ShaderResource& shaderR
 		if (FAILED(hr)) { return; }
 
 		// ピクセルシェーダーの作成
-		hr = _system.GetDevice().Get()->CreatePixelShader(
+		hr = system.get_device().Get()->CreatePixelShader(
 			pixcelShaderBlob.Get()->GetBufferPointer(),
 			pixcelShaderBlob.Get()->GetBufferSize(),
 			nullptr,
-			shaderResource.PixelShader.GetAddressOf());
+			shaderResource.pixelShader.GetAddressOf());
 
 		pixcelShaderBlob.Reset();
 		if (FAILED(hr)) { return; }
 	}
 	else if (extension == "cso") {	// 読み込むファイルの拡張子がcsoの場合
-		std::optional<csoPair> result = LoadCSOFile(pixcelShader.c_str());
+		std::optional<csoPair> result = loadCSOFile(pixcelShader.c_str());
 		auto& [csoBuffer, csoSize] = *result;
 
 		// ピクセルシェーダーの作成
-		hr = _system.GetDevice().Get()->CreatePixelShader(
+		hr = system.get_device().Get()->CreatePixelShader(
 			csoBuffer.get(),
 			csoSize,
 			nullptr,
-			shaderResource.PixelShader.GetAddressOf());
+			shaderResource.pixelShader.GetAddressOf());
 
 		if (FAILED(hr)) { return; }
 	}
 }
 
-HRESULT Shader::CompileShaderFromFile(LPCWSTR fileName, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut) {
+HRESULT Shader::compileShaderFromFile(LPCWSTR fileName, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut) {
 	HRESULT hr = S_OK;
 
 	// コンパイラがHLSLコードをコンパイルする方法を指定
@@ -208,7 +208,7 @@ HRESULT Shader::CompileShaderFromFile(LPCWSTR fileName, LPCSTR entryPoint, LPCST
 	return hr;
 }
 
-std::optional<csoPair> Shader::LoadCSOFile(LPCWSTR fileName) {
+std::optional<csoPair> Shader::loadCSOFile(LPCWSTR fileName) {
 	std::fstream binfile(fileName, std::ios::in | std::ios::binary);
 
 	if (binfile.is_open()) {
@@ -225,7 +225,7 @@ std::optional<csoPair> Shader::LoadCSOFile(LPCWSTR fileName) {
 	return std::nullopt;
 }
 
-std::wstring Shader::ConvertWstring(const std::string& str) {
+std::wstring Shader::convertWstring(const std::string& str) {
 	// バッファの大きさを求める
 	size_t bufferSize = str.length() + 1;
 	// stringをwchar_tに変換する

@@ -4,8 +4,8 @@
 Application::Application() : hWnd(nullptr), hInstance(nullptr) {}
 Application::~Application() {}
 
-bool Application::Init() {
-	if (!InitWindow()) { return false; }
+bool Application::init() {
+	if (!initWindow()) { return false; }
 
 	// ウィンドウを表示
 	ShowWindow(hWnd, SW_SHOWNORMAL);
@@ -19,16 +19,16 @@ bool Application::Init() {
 	return true;
 }
 
-void Application::End() {
+void Application::end() {
 
 }
 
-bool Application::InitWindow() {
+bool Application::initWindow() {
 	// ウィンドウクラス登録
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = CS_HREDRAW | CS_VREDRAW;	// ウィンドウスタイル
-	wcex.lpfnWndProc = WndProc;				// ウィンドウのメッセージを処理するコールバック関数へのポインタ
+	wcex.lpfnWndProc = wndProc;				// ウィンドウのメッセージを処理するコールバック関数へのポインタ
 	wcex.cbClsExtra = 0;					// ウィンドウクラス構造体の後ろに割り当てる補足のバイト数
 	wcex.cbWndExtra = 0;					// ウィンドウインスタンスの後ろに割り当てる補足のバイト数
 	wcex.hInstance = hInstance;				// このクラスのためのウィンドウプロシージャがあるハンドル
@@ -59,7 +59,7 @@ bool Application::InitWindow() {
 	return true;
 }
 
-LRESULT CALLBACK Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK Application::wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 	switch (message) {
 		case WM_CLOSE:		// 閉じるボタンが押されたメッセージ
 			PostMessage(hWnd, WM_DESTROY, 0, 0);

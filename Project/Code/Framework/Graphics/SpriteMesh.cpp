@@ -1,24 +1,24 @@
 #include "SpriteMesh.h"
-#include "../ApplicationConfig.h";
+#include "../ApplicationConfig.h"
 
 using namespace DirectX;
 
-void SpriteMesh::Init(std::shared_ptr<ShaderResource> shaderResource) {
+void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 	// シェーダーの情報を保存
-	_shaderResource = shaderResource;
+	this->shaderResource = shaderResource;
 
 	for (int32_t i = 0; i < SPRITE_VERTEX_COUNT; i++) {
 		// 頂点座標
-		_vertexList[i].Position.x = (i < 2) ? -0.5f : 0.5f;
-		_vertexList[i].Position.y = ((i % 2) == 0) ? -0.5f : 0.5f;
-		_vertexList[i].Position.z = 0.0f;
+		vertexList[i].position.x = (i < 2) ? -0.5f : 0.5f;
+		vertexList[i].position.y = ((i % 2) == 0) ? -0.5f : 0.5f;
+		vertexList[i].position.z = 0.0f;
 		// 頂点の色
-		_vertexList[i].Color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+		vertexList[i].color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 		// UV
-		_vertexList[i].UV.x = (i < 2) ? 0.0f : 1.0f;
-		_vertexList[i].UV.y = ((i % 2) == 0) ? 1.0f : 0.0f;
+		vertexList[i].uv.x = (i < 2) ? 0.0f : 1.0f;
+		vertexList[i].uv.y = ((i % 2) == 0) ? 1.0f : 0.0f;
 		// ノーマルマップ
-		_vertexList[i].Normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
+		vertexList[i].normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
 	}
 
 	// バッファを設定
@@ -30,13 +30,13 @@ void SpriteMesh::Init(std::shared_ptr<ShaderResource> shaderResource) {
 
 	// サブリソースを設定
 	D3D11_SUBRESOURCE_DATA subResourceData = {};
-	subResourceData.pSysMem = _vertexList;	// 初期化データへのポインタ
+	subResourceData.pSysMem = vertexList;	// 初期化データへのポインタ
 	subResourceData.SysMemPitch = 0;		// テクスチャにあるラインの距離
 	subResourceData.SysMemSlicePitch = 0;	// 3Dテクスチャに関する値
-	_system.GetDevice()->CreateBuffer(
+	system.get_device()->CreateBuffer(
 		&descBuffer,
 		&subResourceData,
-		_shaderResource->VertexBuffer.GetAddressOf());
+		this->shaderResource->vertexBuffer.GetAddressOf());
 
 	// TODO:: ビューポート設定(仮)
 	D3D11_VIEWPORT viewPort = {};
@@ -47,7 +47,7 @@ void SpriteMesh::Init(std::shared_ptr<ShaderResource> shaderResource) {
 	viewPort.MinDepth = 0.0f;
 	viewPort.MaxDepth = 1.0f;
 
-	_system.GetDeviceContext()->RSSetViewports(
+	system.get_deviceContext()->RSSetViewports(
 		1,
 		&viewPort
 	);
@@ -61,66 +61,66 @@ void SpriteMesh::Init(std::shared_ptr<ShaderResource> shaderResource) {
 	sampler.ComparisonFunc = D3D11_COMPARISON_NEVER;
 	sampler.MinLOD = 0;
 	sampler.MaxLOD = D3D11_FLOAT32_MAX;
-	_system.GetDevice()->CreateSamplerState(&sampler, _samplerState.GetAddressOf());
+	system.get_device()->CreateSamplerState(&sampler, samplerState.GetAddressOf());
 }
 
-void SpriteMesh::Rendering(const TextureResource& textureResource) {
+void SpriteMesh::rendering(const TextureResource& textureResource) {
 	ConstantBuffer constantBuffer = {};
 	constantBuffer.world = DirectX::XMMatrixTranspose(DirectX::XMMatrixIdentity());
 	constantBuffer.view = DirectX::XMMatrixTranspose(DirectX::XMMatrixIdentity());
 	constantBuffer.projection = DirectX::XMMatrixTranspose(DirectX::XMMatrixIdentity());
-	_system.GetDeviceContext()->UpdateSubresource(_system.GetConstantBuffer().Get(), 0, nullptr, &constantBuffer, 0, 0);
+	system.get_deviceContext()->UpdateSubresource(system.get_constantBuffer().Get(), 0, nullptr, &constantBuffer, 0, 0);
 
 	// サブリソースの更新
-	_system.GetDeviceContext()->UpdateSubresource(
-		_shaderResource->VertexBuffer.Get(),
+	system.get_deviceContext()->UpdateSubresource(
+		shaderResource->vertexBuffer.Get(),
 		0,
 		nullptr,
-		_vertexList,
+		vertexList,
 		0,
 		0);
 	// 入力アセンブラステージに入力レイアウトオブジェクトをバインド
-	_system.GetDeviceContext()->IASetInputLayout(_shaderResource->VertexLayout.Get());
+	system.get_deviceContext()->IASetInputLayout(shaderResource->vertexLayout.Get());
 	// 入力アセンブラステージに頂点バッファの配列をバインド
 	UINT strides = sizeof(Vertex);
 	UINT offset = 0;
-	_system.GetDeviceContext()->IASetVertexBuffers(
+	system.get_deviceContext()->IASetVertexBuffers(
 		0,		// バインドに使用する最初の入力スロット
 		1,		// 配列内の頂点バッファの数
-		_shaderResource->VertexBuffer.GetAddressOf(),	// 頂点バッファの配列へのポインタ
+		shaderResource->vertexBuffer.GetAddressOf(),	// 頂点バッファの配列へのポインタ
 		&strides,	// ストライド値
 		&offset);	// オフセット
 	// 頂点データをデバイスに設定
-	_system.GetDeviceContext()->VSSetShader(
-		_shaderResource->VertexSahder.Get(),	// 頂点シェーダーへのポインタ
+	system.get_deviceContext()->VSSetShader(
+		shaderResource->vertexSahder.Get(),	// 頂点シェーダーへのポインタ
 		nullptr,								// クラスインスタンスインターフェースの配列へのポインタ
 		0);										// 配列のクラスインスタンスインターフェースの数
 	// 頂点シェーダーのパイプラインステージで使用される定数バッファを指定
-	_system.GetDeviceContext()->VSSetConstantBuffers(
+	system.get_deviceContext()->VSSetConstantBuffers(
 		0,		// デバイスの配列の中で定数バッファの設定を開始する位置
 		1,		// 設定するバッファの数
-		_system.GetConstantBuffer().GetAddressOf());	// デバイスに設定する定数バッファの配列
+		system.get_constantBuffer().GetAddressOf());	// デバイスに設定する定数バッファの配列
 
 	// ピクセルシェーダーをデバイスに設定
-	_system.GetDeviceContext()->PSSetShader(
-		_shaderResource->PixelShader.Get(),	// ピクセルシェーダーへのポインタ
+	system.get_deviceContext()->PSSetShader(
+		shaderResource->pixelShader.Get(),	// ピクセルシェーダーへのポインタ
 		nullptr,							// クラスインスタンスインターフェースへの配列へのポインタ
 		0);									// 配列のクラスインスタンスインターフェースの数
 	// テクスチャをシェーダーに渡す
-	_system.GetDeviceContext()->PSSetSamplers(
+	system.get_deviceContext()->PSSetSamplers(
 		0,
 		1,
-		_samplerState.GetAddressOf());
-	_system.GetDeviceContext()->PSSetShaderResources(
+		samplerState.GetAddressOf());
+	system.get_deviceContext()->PSSetShaderResources(
 		0,
 		1,
-		textureResource.ShaderResourceView.GetAddressOf());
+		textureResource.shaderResourceView.GetAddressOf());
 	// 入力アセンブラステージにプリミティブの形状をバインド
-	_system.GetDeviceContext()->IASetPrimitiveTopology(
+	system.get_deviceContext()->IASetPrimitiveTopology(
 		// 頂点データを三角形のリストとして解釈
 		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
 	// プリミティブを描画
-	_system.GetDeviceContext()->Draw(
+	system.get_deviceContext()->Draw(
 		SPRITE_VERTEX_COUNT,
 		0);
 }

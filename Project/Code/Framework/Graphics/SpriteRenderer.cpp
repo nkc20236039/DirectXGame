@@ -3,11 +3,15 @@
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
-const TextureResource& SpriteRenderer::GetOrCreateSprite(std::string path) {
+void SpriteRenderer::createStandardSprite(std::string path) {
+
+}
+
+const TextureResource& SpriteRenderer::getOrCreateSprite(std::string path) {
 	// 既に読み込まれたリソースがある場合
-	if (_textureResourceMap.contains(path)) {
+	if (textureResourceMap.contains(path)) {
 		// インスタンスのポインターを返す
-		return _textureResourceMap[path];
+		return textureResourceMap[path];
 	}
 
 	// 読み込まれているリソースがない場合新しく作成する
@@ -25,27 +29,27 @@ const TextureResource& SpriteRenderer::GetOrCreateSprite(std::string path) {
 	hr = LoadFromWICFile(
 		&wFileName[0],
 		WIC_FLAGS_NONE,
-		&textureResource.Metadata,
-		textureResource.ScratchImage);
+		&textureResource.metadata,
+		textureResource.scratchImage);
 	if (FAILED(hr)) { throw; }
 
 	// GPUテクスチャ作成
 	ComPtr<ID3D11Resource> texture;
 	hr = CreateTexture(
-		_system.GetDevice().Get(),
-		textureResource.ScratchImage.GetImages(),
-		textureResource.ScratchImage.GetImageCount(),
-		textureResource.Metadata,
+		system.get_device().Get(),
+		textureResource.scratchImage.GetImages(),
+		textureResource.scratchImage.GetImageCount(),
+		textureResource.metadata,
 		&texture);
 	if (FAILED(hr)) { throw; }
 
 	// ShaderResourceView作成
-	hr = _system.GetDevice().Get()->CreateShaderResourceView(
+	hr = system.get_device().Get()->CreateShaderResourceView(
 		texture.Get(),
 		nullptr,
-		&textureResource.ShaderResourceView);
+		&textureResource.shaderResourceView);
 
-	_textureResourceMap[path] = std::move(textureResource);
+	textureResourceMap[path] = std::move(textureResource);
 
-	return _textureResourceMap[path];
+	return textureResourceMap[path];
 }

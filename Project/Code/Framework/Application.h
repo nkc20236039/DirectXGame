@@ -7,8 +7,8 @@ public:
 	Application();
 	~Application();
 
-	virtual bool Init();
-	virtual void End();
+	virtual bool init();
+	virtual void end();
 
 protected:
 	HWND hWnd;	// ウィンドウハンドル
@@ -16,7 +16,7 @@ protected:
 
 private:
 	// ウィンドウを初期化する
-	bool InitWindow();
+	bool initWindow();
 	// ウィンドウのメッセージ処理
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+	static LRESULT CALLBACK wndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 };

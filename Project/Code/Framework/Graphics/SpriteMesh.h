@@ -8,13 +8,15 @@
 #pragma	comment(lib, "d3dCompiler.lib")
 
 struct Vertex {
-	DirectX::XMFLOAT3 Position;
-	DirectX::XMFLOAT4 Color;
-	DirectX::XMFLOAT2 UV;
-	DirectX::XMFLOAT3 Normal;
+public:
+	DirectX::XMFLOAT3 position;
+	DirectX::XMFLOAT4 color;
+	DirectX::XMFLOAT2 uv;
+	DirectX::XMFLOAT3 normal;
 };
 
 struct ConstantBuffer {
+public:
 	DirectX::XMMATRIX world;
 	DirectX::XMMATRIX view;
 	DirectX::XMMATRIX projection;
@@ -22,16 +24,16 @@ struct ConstantBuffer {
 
 class SpriteMesh {
 public:
-	SpriteMesh(Direct3D& system) : _system(system) {}
+	SpriteMesh(Direct3D& system) : system(system) {}
 	~SpriteMesh() {}
 
-	void Init(std::shared_ptr<ShaderResource> shaderResource);
-	void Rendering(const TextureResource& textureResource);
+	void init(std::shared_ptr<ShaderResource> shaderResource);
+	void rendering(const TextureResource& textureResource);
 private:
 	const int32_t SPRITE_VERTEX_COUNT = 4;
 
-	Direct3D& _system;
-	std::shared_ptr<ShaderResource> _shaderResource;
-	Microsoft::WRL::ComPtr<ID3D11SamplerState> _samplerState;
-	Vertex _vertexList[4] = {};
+	Direct3D& system;
+	std::shared_ptr<ShaderResource> shaderResource;
+	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
+	Vertex vertexList[4] = {};
 };

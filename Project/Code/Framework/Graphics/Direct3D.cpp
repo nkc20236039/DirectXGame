@@ -5,9 +5,9 @@
 
 Direct3D::~Direct3D() = default;
 
-bool Direct3D::Init() {
+bool Direct3D::init() {
 	// アプリケーションの初期化を先に行う
-	Application::Init();
+	Application::init();
 
 	// 生成結果を格納する
 	HRESULT hr = S_OK;
@@ -41,10 +41,10 @@ bool Direct3D::Init() {
 			0,
 			D3D11_SDK_VERSION,
 			&chain,
-			_swapChain.GetAddressOf(),
-			_device.GetAddressOf(),
+			swapChain.GetAddressOf(),
+			device.GetAddressOf(),
 			&level,
-			_deviceContext.GetAddressOf()
+			deviceContext.GetAddressOf()
 		);
 
 		// エラーがあればfalseで終了
@@ -55,7 +55,7 @@ bool Direct3D::Init() {
 	{
 		// スワップチェインから最初のバックバッファを取得
 		Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;	// バッファのアクセスに使うインターフェース
-		hr = _swapChain.Get()->GetBuffer(
+		hr = swapChain.Get()->GetBuffer(
 			0,
 			__uuidof(ID3D11Texture2D),
 			(LPVOID*)backBuffer.GetAddressOf()
@@ -64,10 +64,10 @@ bool Direct3D::Init() {
 		// エラーがあればfalseで終了
 		if (FAILED(hr)) { return false; }
 
-		hr = _device->CreateRenderTargetView(
+		hr = device->CreateRenderTargetView(
 			backBuffer.Get(),
 			nullptr,
-			_renderTargetView.GetAddressOf()
+			renderTargetView.GetAddressOf()
 		);
 
 		// エラーがあればfalseで終了
@@ -90,10 +90,10 @@ bool Direct3D::Init() {
 		depth.MiscFlags = 0;
 
 		// 2Dテクスチャの配列を作成
-		hr = _device->CreateTexture2D(
+		hr = device->CreateTexture2D(
 			&depth,
 			nullptr,
-			_depthStencil.GetAddressOf()
+			depthStencil.GetAddressOf()
 		);
 
 		// エラーがあればfalseで終了
@@ -105,20 +105,20 @@ bool Direct3D::Init() {
 		dsv.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 		dsv.Flags = 0;
 		dsv.Texture2D.MipSlice = 0;
-		hr = _device->CreateDepthStencilView(
-			_depthStencil.Get(),
+		hr = device->CreateDepthStencilView(
+			depthStencil.Get(),
 			&dsv,
-			_depthStencilView.GetAddressOf()
+			depthStencilView.GetAddressOf()
 		);
 
 		// エラーがあればfalseで終了
 		if (FAILED(hr)) { return false; }
 
 		// 描画ターゲットビューを出力マネージャーの描画ターゲットとして設定
-		_deviceContext.Get()->OMSetRenderTargets(
+		deviceContext.Get()->OMSetRenderTargets(
 			1,
-			_renderTargetView.GetAddressOf(),
-			_depthStencilView.Get()
+			renderTargetView.GetAddressOf(),
+			depthStencilView.Get()
 		);
 	}
 
@@ -138,13 +138,13 @@ bool Direct3D::Init() {
 		};
 
 		// ラスタライズステートオブジェクトの作成
-		_device.Get()->CreateRasterizerState(
+		device.Get()->CreateRasterizerState(
 			&rasterizer,
-			_rasterizerState.GetAddressOf()
+			rasterizerState.GetAddressOf()
 		);
 
 		// ラスタライザーをコンテキストに設定
-		_deviceContext.Get()->RSSetState(_rasterizerState.Get());
+		deviceContext.Get()->RSSetState(rasterizerState.Get());
 	}
 
 	// ブレンディングステートの作成
@@ -161,9 +161,9 @@ bool Direct3D::Init() {
 		blend.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
 		blend.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-		_device.Get()->CreateBlendState(
+		device.Get()->CreateBlendState(
 			&blend,
-			_blendState.GetAddressOf()
+			blendState.GetAddressOf()
 		);
 
 		// ブレンディングステートの設定
@@ -175,8 +175,8 @@ bool Direct3D::Init() {
 		};
 
 		// ブレンディングステートの設定
-		_deviceContext.Get()->OMSetBlendState(
-			_blendState.Get(),
+		deviceContext.Get()->OMSetBlendState(
+			blendState.Get(),
 			blendFactor,
 			0xffffffff
 		);
@@ -189,10 +189,10 @@ bool Direct3D::Init() {
 		bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 		bufferDesc.CPUAccessFlags = 0;
 
-		hr = _device->CreateBuffer(
+		hr = device->CreateBuffer(
 			&bufferDesc,
 			nullptr,
-			_constantBuffer.GetAddressOf());
+			constantBuffer.GetAddressOf());
 
 		if (FAILED(hr)) { return false; }
 	}
@@ -200,16 +200,16 @@ bool Direct3D::Init() {
 	return true;
 }
 
-void Direct3D::RenderBegin(float r, float g, float b, float a) {
+void Direct3D::renderBegin(float r, float g, float b, float a) {
 	float color[4] = { r, g, b, a };
-	_deviceContext.Get()->ClearRenderTargetView(_renderTargetView.Get(), color);
-	_deviceContext.Get()->ClearDepthStencilView(_depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+	deviceContext.Get()->ClearRenderTargetView(renderTargetView.Get(), color);
+	deviceContext.Get()->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
-void Direct3D::RenderEnd() {
-	_swapChain->Present(0, 0);
+void Direct3D::renderEnd() {
+	swapChain->Present(0, 0);
 }
 
-void Direct3D::End() {
+void Direct3D::end() {
 
 }

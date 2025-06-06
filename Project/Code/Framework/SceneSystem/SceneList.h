@@ -18,7 +18,7 @@ public:
 	/// <typeparam name="T">ISceneを継承したクラス</typeparam>
 	/// <param name="scene">シーンクラスのインスタンス</param>
 	template<DerivedIScene T>
-	void Register(T scene);
+	void registerScene(T scene);
 
 	/// <summary>
 	/// ゲーム開始時最初に実行されるシーンを指定します
@@ -26,8 +26,8 @@ public:
 	/// <typeparam name="T">ISceneを継承したクラス</typeparam>
 	/// <param name="scene">シーンクラスのインスタンス</param>
 	template<DerivedIScene T>
-	void RegisterBootScene(T scene);
+	void registerBootScene(T scene);
 private:
-	std::unordered_map<std::type_index, std::shared_ptr<IScene>> _sceneContainer;
-	std::unique_ptr<IScene> _currentScene;
+	std::unordered_map<std::type_index, std::shared_ptr<IScene>> sceneContainer;
+	std::unique_ptr<IScene> currentScene;
 };

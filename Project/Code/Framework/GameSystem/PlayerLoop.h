@@ -2,6 +2,6 @@
 
 class PlayerLoop {
 public:
-	void Initialize();
-	void Update();
+	void initialize();
+	void update();
 };
