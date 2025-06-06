@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Project\Code\Framework\Application.cpp" />
+    <ClCompile Include="Project\Code\Framework\GameSystem\GameLoop.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\Direct3D.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\Shader.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\SpriteMesh.cpp" />
@@ -145,10 +146,12 @@
     <ClCompile Include="Project\Code\Scope\SceneScope.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Project\Code\Framework\GameSystem\PlayerLoop.h" />
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameLoop.h" />
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\GameObject.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\Shader.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\SpriteMesh.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\SpriteRenderer.h" />
+    <ClInclude Include="Project\Code\Framework\Math\Struct\float2.h" />
     <ClInclude Include="Project\Code\Framework\SceneSystem\IScene.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\Direct3D.h" />
     <ClInclude Include="Project\Code\Framework\Application.h" />

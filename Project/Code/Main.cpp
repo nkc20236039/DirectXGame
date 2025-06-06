@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 #include "./Framework/Graphics/Direct3D.h"
-#include "./Framework/GameSystem/PlayerLoop.h"
+#include "./Framework/GameSystem/GameLoop.h"
 #include "./Framework/Graphics/Shader.h"
 #include "./Framework/Graphics/SpriteMesh.h"
 
@@ -25,7 +25,7 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	std::unique_ptr<Shader> shader = std::make_unique<Shader>(*graphicApp);
 	std::unique_ptr<SpriteMesh> spriteMesh = std::make_unique<SpriteMesh>(*graphicApp);
 	std::unique_ptr<SpriteRenderer> spriteRenderer = std::make_unique<SpriteRenderer>(*graphicApp);
-	// std::unique_ptr<PlayerLoop> playerLoop = std::make_unique<PlayerLoop>();
+	GameLoop gameLoop = GameLoop();
 
 	// 初期化
 	if (!graphicApp->init()) { return 1; }
@@ -38,6 +38,8 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	if (!isComplete) { return 1; }
 
 	spriteMesh->init(shaderResource);
+	// ゲームの初期化
+	gameLoop.initialize();
 
 	MSG hMsg = {};	// メッセージハンドルを初期化
 	float color = 0.0f;

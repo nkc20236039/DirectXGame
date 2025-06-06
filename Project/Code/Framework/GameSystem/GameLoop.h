@@ -1,7 +1,7 @@
 #pragma once
 
-class PlayerLoop {
+class GameLoop {
 public:
-	void initialize();
+	bool initialize();
 	void update();
 };
