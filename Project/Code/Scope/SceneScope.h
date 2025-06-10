@@ -7,8 +7,5 @@ public:
 	SceneScope() {}
 	~SceneScope() {}
 
-	void definer(std::shared_ptr<SceneList> sceneList);
-
-private:
-
+	void definer(const SceneList& sceneList);
 };

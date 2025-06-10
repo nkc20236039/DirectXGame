@@ -3,3 +3,7 @@
 bool GameLoop::initialize() {
 
 }
+
+void update() {
+
+}

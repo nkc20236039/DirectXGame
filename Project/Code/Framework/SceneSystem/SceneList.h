@@ -27,7 +27,9 @@ public:
 	/// <param name="scene">シーンクラスのインスタンス</param>
 	template<DerivedIScene T>
 	void registerBootScene(T scene);
+
+	template<DerivedIScene T>
+	T getScene();
 private:
 	std::unordered_map<std::type_index, std::shared_ptr<IScene>> sceneContainer;
-	std::unique_ptr<IScene> currentScene;
 };

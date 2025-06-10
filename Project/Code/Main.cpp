@@ -55,11 +55,14 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		time += 0.05f;
 		color = std::cos(time);
-		QueryPerformanceFrequency(&timeFrequency);	// FPS制御
-		QueryPerformanceCounter(&timeStart);		// FPS制御
+		// FPS制御
+		QueryPerformanceFrequency(&timeFrequency);
+		QueryPerformanceCounter(&timeStart);
 		graphicApp->renderBegin(color, color, color, 1.0f);
 		spriteMesh->rendering(spriteRenderer->getOrCreateSprite(".\\Assets\\Sprite\\ColorfulSprite.png"));
 		graphicApp->renderEnd();
+		// ゲームループの更新
+		gameLoop.update();
 		FrameRate();
 	}
 
