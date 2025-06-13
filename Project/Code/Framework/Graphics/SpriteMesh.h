@@ -2,7 +2,7 @@
 #include <memory>
 #include "Shader.h"
 #include "SpriteRenderer.h"
-#include "Direct3D.h"
+#include "DirectXApplication.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma	comment(lib, "d3dCompiler.lib")
@@ -24,7 +24,7 @@ public:
 
 class SpriteMesh {
 public:
-	SpriteMesh(Direct3D& system) : system(system) {}
+	SpriteMesh(DirectXApplication& system) : system(system) {}
 	~SpriteMesh() {}
 
 	void init(std::shared_ptr<ShaderResource> shaderResource);
@@ -32,7 +32,7 @@ public:
 private:
 	const int32_t SPRITE_VERTEX_COUNT = 4;
 
-	Direct3D& system;
+	DirectXApplication& system;
 	std::shared_ptr<ShaderResource> shaderResource;
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
 	Vertex vertexList[4] = {};

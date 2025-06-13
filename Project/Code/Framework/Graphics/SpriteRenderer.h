@@ -10,7 +10,7 @@
 #include <DirectXColors.h>
 #include <memory>
 #include <DirectXTex.h>
-#include "Direct3D.h"
+#include "DirectXApplication.h"
 
 struct TextureResource {
 public:
@@ -21,14 +21,14 @@ public:
 
 class SpriteRenderer {
 public:
-	SpriteRenderer(Direct3D& system) : system(system) {}
+	SpriteRenderer(DirectXApplication& system) : system(system) {}
 	~SpriteRenderer() {}
 
-	void createStandardSprite(std::string path);
+	bool createStandardSprite(std::string path);
 	const TextureResource& getOrCreateSprite(std::string path);
 
 private:
-	Direct3D& system;
+	DirectXApplication& system;
 	TextureResource standardSprite;
 	std::unordered_map<std::string, TextureResource> textureResourceMap;
 };

@@ -6,7 +6,7 @@
 #include <string>
 #include <memory>
 #include <optional>
-#include "Direct3D.h"
+#include "DirectXApplication.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dCompiler.lib")
@@ -26,13 +26,13 @@ constexpr char STANDARD_PATH_NAME[] = "Standard";
 
 class Shader {
 public:
-	Shader(Direct3D& system) : system(system) {}
+	Shader(DirectXApplication& system) : system(system) {}
 	~Shader() {}
 	bool CreateStandardShader(const std::string& vertexShaderPath, const std::string& pixcelShaderPath, std::shared_ptr<ShaderResource>& result);
 	const ShaderResource& GetOrCreateShader(std::string vertexShaderPath, std::string pixcelShaderPath);
 
 private:
-	Direct3D& system;
+	DirectXApplication& system;
 	std::string standardShaderPath;
 	std::unordered_map<std::string, ShaderResource> shaderResourceMap;
 

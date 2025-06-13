@@ -11,10 +11,10 @@
 #include "../Application.h"
 
 
-class Direct3D : public Application {
+class DirectXApplication : public Application {
 public:
 	using Application::Application;
-	~Direct3D();
+	~DirectXApplication();
 
 	bool init() override;
 	void renderBegin(float r, float g, float b, float a);

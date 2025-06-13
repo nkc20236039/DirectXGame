@@ -7,5 +7,5 @@ public:
 	SceneScope() {}
 	~SceneScope() {}
 
-	void definer(const SceneList& sceneList);
+	void definer(SceneList& sceneList);
 };

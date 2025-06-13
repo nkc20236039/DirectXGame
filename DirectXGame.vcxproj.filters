@@ -21,7 +21,7 @@
     <ClCompile Include="Project\Code\Framework\Application.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Graphics\Direct3D.cpp">
+    <ClCompile Include="Project\Code\Framework\Graphics\DirectXApplication.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneList.cpp">
@@ -42,6 +42,15 @@
     <ClCompile Include="Project\Code\Framework\GameSystem\GameLoop.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Code\Framework\SceneSystem\SceneSystem.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Code\Scene\MockScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\GameObject.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project\Code\Framework\Application.h">
@@ -50,7 +59,7 @@
     <ClInclude Include="Project\Code\Framework\ApplicationConfig.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Graphics\Direct3D.h">
+    <ClInclude Include="Project\Code\Framework\Graphics\DirectXApplication.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Project\Code\Framework\SceneSystem\SceneList.h">
@@ -77,7 +86,31 @@
     <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\GameObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Math\Struct\float2.h">
+    <ClInclude Include="Project\Code\Framework\Math\Struct\Vector2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\SceneSystem\SceneSystem.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Scene\MockScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\Math\Math.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\Math\Struct\Quaternion.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\IBehavior.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Object.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Actor.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

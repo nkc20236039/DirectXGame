@@ -3,7 +3,7 @@
 using namespace DirectX;
 using namespace Microsoft::WRL;
 
-void SpriteRenderer::createStandardSprite(std::string path) {
+bool SpriteRenderer::createStandardSprite(std::string path) {
 
 }
 

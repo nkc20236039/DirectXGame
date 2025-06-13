@@ -1,11 +1,11 @@
-#include "Direct3D.h"
+#include "DirectXApplication.h"
 #include "../Application.h"
 #include "../ApplicationConfig.h"
 #include "SpriteMesh.h"
 
-Direct3D::~Direct3D() = default;
+DirectXApplication::~DirectXApplication() = default;
 
-bool Direct3D::init() {
+bool DirectXApplication::init() {
 	// アプリケーションの初期化を先に行う
 	Application::init();
 
@@ -118,7 +118,7 @@ bool Direct3D::init() {
 		deviceContext.Get()->OMSetRenderTargets(
 			1,
 			renderTargetView.GetAddressOf(),
-			depthStencilView.Get()
+			nullptr
 		);
 	}
 
@@ -200,16 +200,16 @@ bool Direct3D::init() {
 	return true;
 }
 
-void Direct3D::renderBegin(float r, float g, float b, float a) {
+void DirectXApplication::renderBegin(float r, float g, float b, float a) {
 	float color[4] = { r, g, b, a };
 	deviceContext.Get()->ClearRenderTargetView(renderTargetView.Get(), color);
 	deviceContext.Get()->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
-void Direct3D::renderEnd() {
+void DirectXApplication::renderEnd() {
 	swapChain->Present(0, 0);
 }
 
-void Direct3D::end() {
+void DirectXApplication::end() {
 
 }

@@ -2,7 +2,7 @@
 #include <cstdint>
 #include <memory>
 #include <string>
-#include "./Framework/Graphics/Direct3D.h"
+#include "./Framework/Graphics/DirectXApplication.h"
 #include "./Framework/GameSystem/GameLoop.h"
 #include "./Framework/Graphics/Shader.h"
 #include "./Framework/Graphics/SpriteMesh.h"
@@ -21,7 +21,7 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_opt_ HINSTANCE hPrevInstance,
 	_In_ LPWSTR lpCmdLine,
 	_In_ int32_t nCmdShow) {
-	std::unique_ptr<Direct3D> graphicApp = std::make_unique<Direct3D>();
+	std::unique_ptr<DirectXApplication> graphicApp = std::make_unique<DirectXApplication>();
 	std::unique_ptr<Shader> shader = std::make_unique<Shader>(*graphicApp);
 	std::unique_ptr<SpriteMesh> spriteMesh = std::make_unique<SpriteMesh>(*graphicApp);
 	std::unique_ptr<SpriteRenderer> spriteRenderer = std::make_unique<SpriteRenderer>(*graphicApp);
@@ -39,7 +39,10 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	spriteMesh->init(shaderResource);
 	// ゲームの初期化
-	gameLoop.initialize();
+	bool isComplete = gameLoop.initialize();
+
+	// 初期化中にエラーが発生した場合はゲームを終了する
+	if (!isComplete) { return 0; }
 
 	MSG hMsg = {};	// メッセージハンドルを初期化
 	float color = 0.0f;
