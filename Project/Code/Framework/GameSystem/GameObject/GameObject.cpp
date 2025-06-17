@@ -20,7 +20,7 @@ std::shared_ptr<Actor> GameObject::CreateActor(std::string spritePath, Vector2 p
 	for (actorIterator = actors.begin(); actorIterator != actors.end(); actorIterator++) {
 		// レイヤーの優先度が指定された優先度になるまで走査する
 		if (layer < actorIterator->get()->GetLayer()) {
-			break;
+			break;	// 見つかった部分でループを抜け、現在のiteratorの部分にあとで挿入する
 		}
 	}
 
