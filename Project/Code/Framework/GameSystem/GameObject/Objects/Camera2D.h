@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "../../../Math/Math.h"
+#include "../../../Math/MathX.h"
 #include <DirectXMath.h>
 
 class Camera2D : public Object {
@@ -8,9 +8,17 @@ public:
 	Camera2D() = default;
 	~Camera2D() = default;
 
-	void SetPosition(Vector2 position);
-	void SetRotation(float angle);
-	void SetZoom(float scale);
+	void setPosition(Vector2 position);
+	void setRotation(float angle);
+	void setZoom(float scale);
 
-	DirectX::XMMATRIX GetViewProjectionMatrix() const;
+	Vector2 getPosition();
+	float getRotation();
+	float getZoom();
+
+	DirectX::XMMATRIX getViewProjectionMatrix() const;
+private:
+	Vector2 position;
+	float rotation;
+	float zoom = 1.0f;
 };

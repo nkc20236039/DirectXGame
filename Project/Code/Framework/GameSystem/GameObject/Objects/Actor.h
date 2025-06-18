@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "../../../Math/Math.h"
+#include "../../../Math/MathX.h"
 #include <string>
 
 class Actor : public Object{

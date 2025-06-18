@@ -3,7 +3,7 @@
 #include <list>
 #include <memory>
 #include "Objects/Actor.h"
-#include "../../Math/Math.h"
+#include "../../Math/MathX.h"
 #include "../../Graphics/SpriteMesh.h"
 #include "../../Graphics/SpriteRenderer.h"
 

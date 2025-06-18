@@ -138,10 +138,12 @@
     <ClCompile Include="Project\Code\Framework\Application.cpp" />
     <ClCompile Include="Project\Code\Framework\GameSystem\GameLoop.cpp" />
     <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\GameObject.cpp" />
+    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\DirectXApplication.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\Shader.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\SpriteMesh.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\SpriteRenderer.cpp" />
+    <ClCompile Include="Project\Code\Framework\Math\Convert\MathXConvert.cpp" />
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneList.cpp" />
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneSystem.cpp" />
     <ClCompile Include="Project\Code\Main.cpp" />
@@ -158,7 +160,7 @@
     <ClInclude Include="Project\Code\Framework\Graphics\Shader.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\SpriteMesh.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\SpriteRenderer.h" />
-    <ClInclude Include="Project\Code\Framework\Math\Math.h" />
+    <ClInclude Include="Project\Code\Framework\Math\MathX.h" />
     <ClInclude Include="Project\Code\Framework\Math\Struct\Quaternion.h" />
     <ClInclude Include="Project\Code\Framework\Math\Struct\Vector2.h" />
     <ClInclude Include="Project\Code\Framework\SceneSystem\IScene.h" />
