@@ -57,6 +57,12 @@
     <ClCompile Include="Project\Code\Framework\Math\Convert\MathXConvert.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="Project\Code\Framework\Math\Struct\Vector2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\Transform.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Project\Code\Framework\Application.h">
@@ -104,9 +110,6 @@
     <ClInclude Include="Project\Code\Framework\Math\MathX.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Math\Struct\Quaternion.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\IBehavior.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -117,6 +120,9 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Transform.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

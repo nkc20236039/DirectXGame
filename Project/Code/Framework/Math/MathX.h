@@ -1,6 +1,5 @@
 #pragma once
 #include "Struct/Vector2.h"
-#include "Struct/Quaternion.h"
 #include <DirectXMath.h>
 
 class MathX final

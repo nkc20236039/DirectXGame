@@ -17,7 +17,7 @@ public:
 	void Create2DCamera();
 
 	// アクター作成
-	std::shared_ptr<Actor> CreateActor(std::string spritePath, Vector2 position, Vector2 scale, Quaternion rotation, uint32_t layer);
+	std::shared_ptr<Actor> CreateActor(std::string spritePath, Transform transform, uint32_t layer);
 
 	// レンダリング
 	void Render();

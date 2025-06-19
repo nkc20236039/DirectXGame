@@ -16,8 +16,8 @@ bool DirectXApplication::init() {
 	{
 		DXGI_SWAP_CHAIN_DESC chain = {};	// スワップチェインを初期化宣言
 		chain.BufferCount = 1;	// バックバッファの数
-		chain.BufferDesc.Width = WINDOW_W;	// バックバッファの幅
-		chain.BufferDesc.Width = WINDOW_H;	// バックバッファの高さ
+		chain.BufferDesc.Width = WINDOW_WIDTH;	// バックバッファの幅
+		chain.BufferDesc.Width = WINDOW_HEIGHT;	// バックバッファの高さ
 		chain.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;	// フォーマット
 		chain.BufferDesc.RefreshRate.Numerator = 60;		// リフレッシュレート
 		chain.BufferDesc.RefreshRate.Denominator = 1;	// リフレッシュレート
@@ -77,8 +77,8 @@ bool DirectXApplication::init() {
 	// 深度/ステンシルテクスチャの作成
 	{
 		D3D11_TEXTURE2D_DESC depth;
-		depth.Width = WINDOW_W;
-		depth.Height = WINDOW_H;
+		depth.Width = WINDOW_WIDTH;
+		depth.Height = WINDOW_HEIGHT;
 		depth.MipLevels = 1;
 		depth.ArraySize = 1;
 		depth.Format = DXGI_FORMAT_D32_FLOAT;

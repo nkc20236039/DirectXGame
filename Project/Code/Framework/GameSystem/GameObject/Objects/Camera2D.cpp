@@ -1,15 +1,27 @@
 #include "Camera2D.h"
+#include "../../../ApplicationConfig.h"
+using namespace DirectX;
 
-void Camera2D::setPosition(Vector2 position) {
-	// 現在の座標に代入
-	Camera2D::position = position;
-}
+XMMATRIX Camera2D::getCameraMatrix() {
+	// 普通のtransformとは逆のためここで行列変換をする
+	Vector2 position = transform.getPosition();
+	XMMATRIX translate = XMMatrixTranslation(-position.x, -position.y, 0.0f);
+	XMMATRIX rotation = XMMatrixRotationZ(transform.getAngle());
+	XMMATRIX scale = XMMatrixScaling(zoom, zoom, 1.0f);
+	// ビュー行列を求める
+	XMMATRIX view = translate * rotation * scale;
 
-void Camera2D::setRotation(float angle) {
-	// ラジアンに変換して回転へ代入
-	rotation = MathX::toRadians(angle);
-}
+	// 画面の真ん中を求める
+	float halfWidth = WINDOW_WIDTH * 0.5f;
+	float halfHeight = WINDOW_HEIGHT * 0.5f;
+	// プロジェクション行列を求める
+	XMMATRIX projection = XMMatrixOrthographicOffCenterLH(
+		-halfWidth,
+		halfWidth,
+		-halfHeight,
+		halfHeight,
+		0.0f, 1.0f
+	);
 
-void Camera2D::setZoom(float scale) {
-	zoom = scale;
+	return view * projection;
 }

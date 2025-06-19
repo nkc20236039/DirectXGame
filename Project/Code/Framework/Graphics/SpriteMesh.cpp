@@ -42,8 +42,8 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 	D3D11_VIEWPORT viewPort = {};
 	viewPort.TopLeftX = 0.0f;
 	viewPort.TopLeftY = 0.0f;
-	viewPort.Width = WINDOW_W;
-	viewPort.Height = WINDOW_H;
+	viewPort.Width = WINDOW_WIDTH;
+	viewPort.Height = WINDOW_HEIGHT;
 	viewPort.MinDepth = 0.0f;
 	viewPort.MaxDepth = 1.0f;
 

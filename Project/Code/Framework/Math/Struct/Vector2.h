@@ -1,8 +1,10 @@
 #pragma once
+#include <DirectXMath.h>
 
 struct Vector2 {
 public:
 	Vector2(float x, float y) : x(x), y(y) {}
+	~Vector2() = default;
 
 	float x;
 	float y;

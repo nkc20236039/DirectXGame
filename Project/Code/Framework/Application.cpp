@@ -47,8 +47,8 @@ bool Application::initWindow() {
 		WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,// ウィンドウスタイル
 		CW_USEDEFAULT,				// ウィンドウ左上x座標
 		CW_USEDEFAULT,				// ウィンドウ左上y座標
-		WINDOW_W,					// ウィンドウ幅
-		WINDOW_H,					// ウィンドウ高さ
+		WINDOW_WIDTH,					// ウィンドウ幅
+		WINDOW_HEIGHT,					// ウィンドウ高さ
 		nullptr,					// 親ウィンドウのハンドル
 		nullptr,					// メニューのハンドル
 		wcex.hInstance,				// ウィンドウを作成するモジュールのハンドル

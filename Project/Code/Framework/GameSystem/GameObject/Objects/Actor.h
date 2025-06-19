@@ -3,22 +3,19 @@
 #include "../../../Math/MathX.h"
 #include <string>
 
-class Actor : public Object{
+class Actor : public Object {
 public:
-	Actor(std::string spritePath, Vector2 position, Vector2 scale, Quaternion rotation, uint32_t layer)
-		: spritePath(spritePath), position(position), scale(scale), rotation(rotation), layer(layer) {
+	Actor(std::string spritePath, Transform transform, uint32_t layer)
+		: spritePath(spritePath), transform(transform), layer(layer) {
 	}
 	~Actor() = default;
 
-	std::string GetSpritePath() { return spritePath; }
-	Vector2 GetPosition() { return position; }
-	Vector2 GetScale() { return scale; }
-	Quaternion GetRotation() { return rotation; }
-	uint32_t GetLayer() { return layer; }
+	// Getter
+	std::string getSpritePath() { return spritePath; }
+	Transform getTransform() { return transform; }
+	uint32_t getLayer() { return layer; }
 private:
 	std::string spritePath;
-	Vector2 position;
-	Vector2 scale;
-	Quaternion rotation;
+	Transform transform;
 	uint32_t layer;
 };

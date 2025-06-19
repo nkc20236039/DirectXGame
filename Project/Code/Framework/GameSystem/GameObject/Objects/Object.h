@@ -1,5 +1,6 @@
 #pragma once
 #include "../IBehavior.h"
+#include "../Transform.h"
 
 class Object {
 public:
