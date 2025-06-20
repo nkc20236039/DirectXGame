@@ -148,6 +148,7 @@
     <ClCompile Include="Project\Code\Framework\Math\Struct\Vector2.cpp" />
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneList.cpp" />
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneSystem.cpp" />
+    <ClCompile Include="Project\Code\Framework\Utility.cpp" />
     <ClCompile Include="Project\Code\Main.cpp" />
     <ClCompile Include="Project\Code\Scene\MockScene.cpp" />
     <ClCompile Include="Project\Code\Scope\SceneScope.cpp" />

@@ -25,10 +25,12 @@ public:
 	~SpriteRenderer() {}
 
 	bool createStandardSprite(std::string path);
-	const TextureResource& getOrCreateSprite(std::string path);
+	const TextureResource& getSprite(std::string path);
 
 private:
 	DirectXApplication& system;
-	TextureResource standardSprite;
+	std::string standardSpritePath;
 	std::unordered_map<std::string, TextureResource> textureResourceMap;
+
+	bool createSprite()
 };
