@@ -1,17 +1,22 @@
 #include "GameObject.h"
 
+GameObject::GameObject(const DirectXApplication& app) : application(app), isInitialized(true) {}
+
 /// <summary>
 /// ゲームオブジェクトクラスの単一インスタンスを取得します
 /// </summary>
 /// <returns></returns>
-GameObject& GameObject::GetInstance() {
-	// staticで最初の一回だけインスタンスを作成
-	static GameObject instance;
-	// 作成されたインスタンスを返す
-	return instance;
+GameObject& GameObject::getInstance() {
+	// インスタンスが存在しないか初期化がされていない場合
+	if (!instance || !instance->isInitialized) {
+		// エラーを出力
+		throw "[GameObject]は初期化されていません";
+	}
+
+	return *instance;
 }
 
-std::shared_ptr<Actor> GameObject::CreateActor(std::string spritePath, Transform transform, uint32_t layer) {
+std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform transform, uint32_t layer) {
 	// 新しいアクターを作成する
 	std::shared_ptr<Actor> newActor = std::make_shared<Actor>(spritePath, transform, layer);
 
@@ -30,6 +35,35 @@ std::shared_ptr<Actor> GameObject::CreateActor(std::string spritePath, Transform
 	return newActor;
 }
 
-void GameObject::Render() {
-	
+void GameObject::render() {
+
 }
+
+/* インスタンス初期化専用処理 */
+bool GameObject::init(const DirectXApplication& app) {
+	// シングルトン用インスタンスが登録されていない場合
+	if (!instance) {
+		// 新しく作成する
+		instance = new GameObject(app);	// 永久生存のため生ポインタで管理()
+	}
+
+	// 作成したインスタンスへ描画に必要なクラスのポインタを作成
+	instance->shader = std::make_unique<Shader>(app);
+	instance->spriteMesh = std::make_unique<SpriteMesh>(app);
+	instance->spriteRenderer = std::make_unique<SpriteRenderer>(app);
+
+	// StandardShaderResourceを取得
+	std::shared_ptr<ShaderResource> shaderResource = std::make_shared<ShaderResource>();
+	// 初期シェーダーを作成
+	bool isComplete = instance->shader->CreateStandardShader(
+		".\\Assets\\Shader\\Standard\\VertexShader.hlsl",
+		".\\Assets\\Shader\\Standard\\PixelShader.hlsl",
+		shaderResource);
+	// 初期化が失敗したらこの初期化関数も失敗として返す
+	if (!isComplete) { return false; }
+
+	instance->spriteMesh->init(shaderResource);
+
+	return true;
+}
+

@@ -22,22 +22,12 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR lpCmdLine,
 	_In_ int32_t nCmdShow) {
 	std::unique_ptr<DirectXApplication> graphicApp = std::make_unique<DirectXApplication>();
-	std::unique_ptr<Shader> shader = std::make_unique<Shader>(*graphicApp);
-	std::unique_ptr<SpriteMesh> spriteMesh = std::make_unique<SpriteMesh>(*graphicApp);
-	std::unique_ptr<SpriteRenderer> spriteRenderer = std::make_unique<SpriteRenderer>(*graphicApp);
+
 	GameLoop gameLoop = GameLoop();
 
 	// ‰Šú‰»
 	if (!graphicApp->init()) { return 1; }
-	// StandardShaderResource‚ğæ“¾
-	std::shared_ptr<ShaderResource> shaderResource = std::make_shared<ShaderResource>();
-	bool isComplete = shader->CreateStandardShader(
-		".\\Assets\\Shader\\Standard\\VertexShader.hlsl",
-		".\\Assets\\Shader\\Standard\\PixelShader.hlsl",
-		shaderResource);
-	if (!isComplete) { return 1; }
-
-	spriteMesh->init(shaderResource);
+	
 	// ƒQ[ƒ€‚Ì‰Šú‰»
 	bool isComplete = gameLoop.initialize();
 
