@@ -46,6 +46,5 @@ private:
 	HRESULT compileShaderFromFile(LPCWSTR fileName, LPCSTR entryPoint, LPCSTR shaderModel, ID3DBlob** blobOut);
 	void createVertexShader(const std::string& path, ShaderResource& shaderResource);
 	void createPixcelShader(const std::string& path, ShaderResource& shaderResource);
-	std::wstring convertWstring(const std::string& str);
 	std::optional<std::pair<std::unique_ptr<uint8_t[]>, int32_t>> loadCSOFile(LPCWSTR fileName);
 };

@@ -5,7 +5,7 @@
 
 class GameLoop {
 public:
-	bool initialize(const DirectXApplication& graphicApp);
+	bool init(DirectXApplication& graphicApp);
 	void update();
 
 private:

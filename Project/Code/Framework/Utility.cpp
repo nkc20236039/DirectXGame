@@ -1,9 +1,10 @@
-#include <string>
+#include "Utility.h"
+#include <algorithm>
 
 std::wstring convertWstringPath(const std::string& path) {
 	// もし`/`でパスが区切られていたら`\\`に変更する
 	std::string normalizedPath = path;
-	normalizedPath.replace(path.begin(), path.end(), "/", "\\");
+	std::replace(normalizedPath.begin(), normalizedPath.end(), '/', '\\');
 	// バッファの大きさを求める
 	size_t bufferSize = normalizedPath.length() + 1;
 	// stringをwchar_tに変換する

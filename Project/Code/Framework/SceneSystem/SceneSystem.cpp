@@ -1,12 +1,14 @@
 #include "SceneSystem.h"
 #include "../../Scope/SceneScope.h"
 
+SceneSystem* SceneSystem::instance = nullptr;
+
 SceneSystem::SceneSystem() {
 	// シーンのリストを作成
 	sceneList = std::make_unique<SceneList>();
 }
 
-SceneSystem& SceneSystem::GetInstance() {
+SceneSystem& SceneSystem::getInstance() {
 	// 取得したいインスタンスが存在しない場合
 	if (instance == nullptr) {
 		instance = new SceneSystem();
@@ -14,7 +16,7 @@ SceneSystem& SceneSystem::GetInstance() {
 	return *instance;
 }
 
-bool SceneSystem::Init() {
+bool SceneSystem::init() {
 	// シーンの登録
 	SceneScope sceneScope = SceneScope();
 
@@ -25,8 +27,10 @@ bool SceneSystem::Init() {
 
 	// 起動シーンをループに登録
 	currentScene = sceneList->getScene(sceneList->getBootSceneIndex());
+
+	return true;
 }
 
-IScene& SceneSystem::GetCurrentScene() {
+IScene& SceneSystem::getCurrentScene() {
 	return *currentScene;
 }

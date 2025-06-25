@@ -32,5 +32,5 @@ private:
 	std::string standardSpritePath;
 	std::unordered_map<std::string, TextureResource> textureResourceMap;
 
-	bool createSprite()
+	bool createSprite(std::string path);
 };

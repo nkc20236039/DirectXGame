@@ -76,6 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,7 +145,7 @@
     <ClCompile Include="Project\Code\Framework\Graphics\Shader.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\SpriteMesh.cpp" />
     <ClCompile Include="Project\Code\Framework\Graphics\SpriteRenderer.cpp" />
-    <ClCompile Include="Project\Code\Framework\Math\Convert\MathXConvert.cpp" />
+    <ClCompile Include="Project\Code\Framework\Math\MathX.cpp" />
     <ClCompile Include="Project\Code\Framework\Math\Struct\Vector2.cpp" />
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneList.cpp" />
     <ClCompile Include="Project\Code\Framework\SceneSystem\SceneSystem.cpp" />
@@ -165,6 +166,7 @@
     <ClInclude Include="Project\Code\Framework\Graphics\SpriteMesh.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\SpriteRenderer.h" />
     <ClInclude Include="Project\Code\Framework\Math\MathX.h" />
+    <ClInclude Include="Project\Code\Framework\Math\Struct\Color.h" />
     <ClInclude Include="Project\Code\Framework\Math\Struct\Vector2.h" />
     <ClInclude Include="Project\Code\Framework\SceneSystem\IScene.h" />
     <ClInclude Include="Project\Code\Framework\Graphics\DirectXApplication.h" />
@@ -172,6 +174,7 @@
     <ClInclude Include="Project\Code\Framework\ApplicationConfig.h" />
     <ClInclude Include="Project\Code\Framework\SceneSystem\SceneList.h" />
     <ClInclude Include="Project\Code\Framework\SceneSystem\SceneSystem.h" />
+    <ClInclude Include="Project\Code\Framework\Utility.h" />
     <ClInclude Include="Project\Code\Scene\MockScene.h" />
     <ClInclude Include="Project\Code\Scope\SceneScope.h" />
   </ItemGroup>

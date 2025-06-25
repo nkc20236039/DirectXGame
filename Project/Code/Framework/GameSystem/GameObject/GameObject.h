@@ -32,11 +32,11 @@ private:
 	friend class GameLoop;
 
 	// コンストラクタの呼び出しを禁止
-	GameObject(const DirectXApplication& app);
+	GameObject(DirectXApplication& app);
 	~GameObject() = default;
 
 	// GameLoop限定初期化処理
-	static bool init(const DirectXApplication& app);
+	static bool init(DirectXApplication& app);
 
 	// インスタンス作成チェック
 	bool isInitialized = false;

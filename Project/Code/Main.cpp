@@ -4,8 +4,6 @@
 #include <string>
 #include "./Framework/Graphics/DirectXApplication.h"
 #include "./Framework/GameSystem/GameLoop.h"
-#include "./Framework/Graphics/Shader.h"
-#include "./Framework/Graphics/SpriteMesh.h"
 
 #pragma comment(lib,"winmm.lib")
 
@@ -27,16 +25,14 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// 初期化
 	if (!graphicApp->init()) { return 1; }
-	
+
 	// ゲームの初期化
-	bool isComplete = gameLoop.initialize();
+	bool isComplete = gameLoop.init(*graphicApp);
 
 	// 初期化中にエラーが発生した場合はゲームを終了する
 	if (!isComplete) { return 0; }
 
 	MSG hMsg = {};	// メッセージハンドルを初期化
-	float color = 0.0f;
-	float time = 0.0f;
 	// メインループ
 	while (hMsg.message != WM_QUIT) {
 		// メッセージ取得を試みる
@@ -46,14 +42,9 @@ int32_t APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			// ウィンドウプロシージャにメッセージを渡す
 			DispatchMessage(&hMsg);
 		}
-		time += 0.05f;
-		color = std::cos(time);
 		// FPS制御
 		QueryPerformanceFrequency(&timeFrequency);
 		QueryPerformanceCounter(&timeStart);
-		graphicApp->renderBegin(color, color, color, 1.0f);
-		spriteMesh->rendering(spriteRenderer->getOrCreateSprite(".\\Assets\\Sprite\\ColorfulSprite.png"));
-		graphicApp->renderEnd();
 		// ゲームループの更新
 		gameLoop.update();
 		FrameRate();

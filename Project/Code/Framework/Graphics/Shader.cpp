@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <fstream>
 #include "Shader.h"
+#include "../Utility.h"
 
 using namespace Microsoft::WRL;
 using csoPair = std::pair<std::unique_ptr<uint8_t[]>, int32_t>;	// cso用のペアを短縮
@@ -70,7 +71,7 @@ void Shader::createVertexShader(const std::string& path, ShaderResource& shaderR
 	// ファイルの拡張子を取得
 	size_t dotSplit = path.find_last_of('.');
 	std::string extension = path.substr(dotSplit + 1);
-	std::wstring vertexShader = convertWstring(path);
+	std::wstring vertexShader = convertWstringPath(path);
 
 	// 読み込むファイルの拡張子がhlslの場合
 	if (extension == "hlsl") {
@@ -132,7 +133,7 @@ void Shader::createPixcelShader(const std::string& path, ShaderResource& shaderR
 	// ファイルの拡張子を取得
 	size_t dotSplit = path.find_last_of('.');
 	std::string extension = path.substr(dotSplit + 1);
-	std::wstring pixcelShader = convertWstring(path);
+	std::wstring pixcelShader = convertWstringPath(path);
 
 	// 読み込むファイルの拡張子がhlslの場合
 	if (extension == "hlsl") {
@@ -223,16 +224,4 @@ std::optional<csoPair> Shader::loadCSOFile(LPCWSTR fileName) {
 	}
 
 	return std::nullopt;
-}
-
-std::wstring Shader::convertWstring(const std::string& str) {
-	// バッファの大きさを求める
-	size_t bufferSize = str.length() + 1;
-	// stringをwchar_tに変換する
-	std::wstring wStr(bufferSize, L'\0');
-	size_t convertedChars = 0;
-	// 変換を実行
-	mbstowcs_s(&convertedChars, &wStr[0], bufferSize, str.c_str(), bufferSize);
-
-	return wStr;
 }

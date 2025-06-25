@@ -126,7 +126,7 @@ bool DirectXApplication::init() {
 	{
 		D3D11_RASTERIZER_DESC rasterizer = {
 			D3D11_FILL_SOLID,
-			D3D11_CULL_NONE,
+			D3D11_CULL_BACK,
 			FALSE,
 			0,
 			0.0f,

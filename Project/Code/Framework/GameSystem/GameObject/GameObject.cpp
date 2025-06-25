@@ -1,6 +1,10 @@
 #include "GameObject.h"
 
-GameObject::GameObject(const DirectXApplication& app) : application(app), isInitialized(true) {}
+GameObject::GameObject(DirectXApplication& app)
+	: application(app), isInitialized(true) {
+}
+
+GameObject* GameObject::instance = nullptr;
 
 /// <summary>
 /// ゲームオブジェクトクラスの単一インスタンスを取得します
@@ -40,7 +44,7 @@ void GameObject::render() {
 }
 
 /* インスタンス初期化専用処理 */
-bool GameObject::init(const DirectXApplication& app) {
+bool GameObject::init(DirectXApplication& app) {
 	// シングルトン用インスタンスが登録されていない場合
 	if (!instance) {
 		// 新しく作成する
@@ -62,8 +66,11 @@ bool GameObject::init(const DirectXApplication& app) {
 	// 初期化が失敗したらこの初期化関数も失敗として返す
 	if (!isComplete) { return false; }
 
+	isComplete = instance->spriteRenderer->createStandardSprite(
+		".\\Assets\\Sprite\\ColorfulSprite.png");
+	if (!isComplete) { return false; }
+
 	instance->spriteMesh->init(shaderResource);
 
 	return true;
 }
-

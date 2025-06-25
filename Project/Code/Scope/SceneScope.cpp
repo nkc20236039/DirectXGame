@@ -1,5 +1,6 @@
 #include "SceneScope.h"
 #include "../Scene/MockScene.h"
+#include <memory>
 
 void SceneScope::definer(SceneList& sceneList) {
 	// ‚±‚±‚ÅƒQ[ƒ€‚ÌƒV[ƒ“‚ğ“o˜^‚·‚é

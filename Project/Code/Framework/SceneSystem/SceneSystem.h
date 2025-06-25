@@ -7,12 +7,14 @@ class SceneSystem {
 public:
 	~SceneSystem() {}
 
-	static SceneSystem& GetInstance();
-	bool Init();
-	IScene& GetCurrentScene();
+	static SceneSystem& getInstance();
+	bool init();
+	IScene& getCurrentScene();
 
 	template<DerivedIScene T>
-	void ChangeScene();
+	void ChangeScene() {
+
+	}
 private:
 	SceneSystem();
 	static SceneSystem* instance;

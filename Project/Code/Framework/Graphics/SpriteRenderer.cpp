@@ -1,5 +1,6 @@
 #include <filesystem>
 #include "SpriteRenderer.h"
+#include "../Utility.h"
 
 using namespace DirectX;
 using namespace Microsoft::WRL;
@@ -9,6 +10,18 @@ bool SpriteRenderer::createStandardSprite(std::string path) {
 	if (!std::filesystem::exists(path)) {
 		return false;
 	}
+
+	// 画像を作成する
+	bool isCreated = createSprite(path);
+
+	// 作成に成功した場合
+	if (isCreated) {
+		// 標準のスプライトリソースのパスに設定する
+		standardSpritePath = path;
+		return true;
+	}
+
+	return false;
 }
 
 const TextureResource& SpriteRenderer::getSprite(std::string path) {
@@ -18,13 +31,22 @@ const TextureResource& SpriteRenderer::getSprite(std::string path) {
 		return textureResourceMap[path];
 	}
 
+	bool isCreated = createSprite(path);
+
+	// 作成に失敗した場合
+	if (!isCreated) {
+		// 標準のテクスチャリソースを返す
+		return textureResourceMap[standardSpritePath];
+	}
+
+	// 作成したテクスチャリソースを返す
+	return textureResourceMap[path];
+}
+
+bool SpriteRenderer::createSprite(std::string path) {
 	// 読み込まれているリソースがない場合新しく作成する
 	HRESULT hr = S_OK;
-	size_t bufferSize = path.length() + 1;
-	// stringをwchar_tに変換する
-	std::wstring wFileName(bufferSize, L'\0');
-	size_t convertedChars = 0;
-	mbstowcs_s(&convertedChars, &wFileName[0], bufferSize, path.c_str(), bufferSize);
+	std::wstring wFileName = convertWstringPath(path);
 	// 新しいリソースを作成
 	TextureResource textureResource = {};
 
@@ -35,7 +57,7 @@ const TextureResource& SpriteRenderer::getSprite(std::string path) {
 		&textureResource.metadata,
 		textureResource.scratchImage);
 	if (FAILED(hr)) {
-		return textureResourceMap[standardSpritePath];
+		return false;
 	}
 
 	// GPUテクスチャ作成
@@ -47,7 +69,7 @@ const TextureResource& SpriteRenderer::getSprite(std::string path) {
 		textureResource.metadata,
 		&texture);
 	if (FAILED(hr)) {
-		return textureResourceMap[standardSpritePath];
+		return false;
 	}
 
 	// ShaderResourceView作成
@@ -57,6 +79,5 @@ const TextureResource& SpriteRenderer::getSprite(std::string path) {
 		&textureResource.shaderResourceView);
 
 	textureResourceMap[path] = std::move(textureResource);
-
-	return textureResourceMap[path];
+	return true;
 }
