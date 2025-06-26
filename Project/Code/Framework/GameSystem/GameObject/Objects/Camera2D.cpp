@@ -5,11 +5,11 @@ using namespace DirectX;
 XMMATRIX Camera2D::getCameraMatrix() {
 	// 普通のtransformとは逆のためここで行列変換をする
 	Vector2 position = transform.getPosition();
-	XMMATRIX translate = XMMatrixTranslation(-position.x, -position.y, 0.0f);
-	XMMATRIX rotation = XMMatrixRotationZ(transform.getAngle());
-	XMMATRIX scale = XMMatrixScaling(zoom, zoom, 1.0f);
 	// ビュー行列を求める
-	XMMATRIX view = translate * rotation * scale;
+	XMMATRIX view
+		= XMMatrixScaling(1.0f/zoom, 1.0f/zoom, 1.0f)
+		* XMMatrixRotationZ(-transform.getAngle())
+		* XMMatrixTranslation(-position.x, -position.y, 0.0f);
 
 	// 画面の真ん中を求める
 	float halfWidth = WINDOW_WIDTH * 0.5f;

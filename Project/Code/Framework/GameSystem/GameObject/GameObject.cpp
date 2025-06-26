@@ -20,6 +20,10 @@ GameObject& GameObject::getInstance() {
 	return *instance;
 }
 
+std::shared_ptr<Camera2D> GameObject::create2DCamera() {
+
+}
+
 std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform transform, uint32_t layer) {
 	// 新しいアクターを作成する
 	std::shared_ptr<Actor> newActor = std::make_shared<Actor>(spritePath, transform, layer);

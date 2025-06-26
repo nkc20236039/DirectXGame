@@ -25,6 +25,12 @@ bool SceneSystem::init() {
 	// 起動シーンが登録されていない場合終了する
 	if (!sceneList->isBootSceneRegistered()) { return false; }
 
+	// 全てのシーンを初期化
+	auto allScene = sceneList->getAllScenes();
+	for (auto scene : allScene) {
+		scene->init();
+	}
+
 	// 起動シーンをループに登録
 	currentScene = sceneList->getScene(sceneList->getBootSceneIndex());
 

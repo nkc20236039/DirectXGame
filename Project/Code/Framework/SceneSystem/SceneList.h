@@ -38,6 +38,7 @@ public:
 		existBootScene = true;
 	}
 
+	// TODO:: ここから下はインターフェースでカプセル化する
 	template<DerivedIScene T>
 	T getScene() {
 		return getScene(typeid(T));
@@ -45,8 +46,10 @@ public:
 
 	std::shared_ptr<IScene> getScene(std::type_index type);
 
+	std::vector<std::shared_ptr<IScene>> getAllScenes();
 	bool isBootSceneRegistered();
 	std::type_index getBootSceneIndex();
+
 private:
 	bool existBootScene;
 	std::type_index bootSceneIndex;

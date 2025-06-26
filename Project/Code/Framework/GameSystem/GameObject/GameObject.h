@@ -6,6 +6,7 @@
 #include "../../Math/MathX.h"
 #include "../../Graphics/SpriteMesh.h"
 #include "../../Graphics/SpriteRenderer.h"
+#include "./Objects/Camera2D.h"
 
 // ゲームオブジェクトの作成責務
 class GameObject {
@@ -14,7 +15,7 @@ public:
 	static GameObject& getInstance();
 
 	// カメラ作成
-	void create2DCamera();
+	std::shared_ptr<Camera2D> create2DCamera();
 
 	// アクター作成
 	std::shared_ptr<Actor> createActor(std::string spritePath, Transform transform, uint32_t layer);

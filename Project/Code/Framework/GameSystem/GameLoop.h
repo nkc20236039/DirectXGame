@@ -7,6 +7,5 @@ class GameLoop {
 public:
 	bool init(DirectXApplication& graphicApp);
 	void update();
-
 private:
 };

@@ -17,6 +17,9 @@ bool GameLoop::init(DirectXApplication& graphicApp) {
 	// エラーチェック
 	if (!isCompleted) { return false; }
 
+	// 初期シーンの入力処理を実行
+	SceneSystem::getInstance().getCurrentScene().enter();
+
 	return true;
 }
 
