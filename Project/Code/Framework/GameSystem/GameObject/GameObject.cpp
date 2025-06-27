@@ -1,9 +1,9 @@
 #include "GameObject.h"
-
+using namespace DirectX;
+// 初期化
 GameObject::GameObject(DirectXApplication& app)
 	: application(app), isInitialized(true) {
 }
-
 GameObject* GameObject::instance = nullptr;
 
 /// <summary>
@@ -20,8 +20,9 @@ GameObject& GameObject::getInstance() {
 	return *instance;
 }
 
-std::shared_ptr<Camera2D> GameObject::create2DCamera() {
-
+std::shared_ptr<Camera2D> GameObject::create2DCamera(Transform transform, float zoom = 1.0f) {
+	// カメラを作成
+	mainCamera = std::make_unique<Camera2D>(transform, zoom);
 }
 
 std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform transform, uint32_t layer) {
@@ -44,7 +45,17 @@ std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform
 }
 
 void GameObject::render() {
+	for (auto actor : actors) {
+		// オブジェクトの座標をカメラに合わせたworld/view/projection行列に変換
+		XMMATRIX wvp
+			= actor->getTransform().getScaleMatrix()
+			* actor->getTransform().getRotationMatrix()
+			* actor->getTransform().getPositionMatrix()
+			* mainCamera->getCameraMatrix();
 
+		// オブジェクトのレンダリング
+		spriteMesh->rendering(wvp, spriteRenderer->getSprite(actor->getSpritePath()));
+	}
 }
 
 /* インスタンス初期化専用処理 */

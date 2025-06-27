@@ -15,18 +15,27 @@ public:
 	static GameObject& getInstance();
 
 	// カメラ作成
-	std::shared_ptr<Camera2D> create2DCamera();
+	std::shared_ptr<Camera2D> create2DCamera(Transform transform, float zoom = 1.0f);
 
 	// アクター作成
 	std::shared_ptr<Actor> createActor(std::string spritePath, Transform transform, uint32_t layer);
 
+	// UI作成
+	// std::shared_ptr<UI> createUI();
+
 	// レンダリング
 	void render();
+
 private:
 	const DirectXApplication& application;
 	std::unique_ptr<Shader> shader;
 	std::unique_ptr<SpriteMesh> spriteMesh;
 	std::unique_ptr<SpriteRenderer> spriteRenderer;
+
+	// カメラ
+	std::unique_ptr<Camera2D> mainCamera;
+	// レンダリング処理が必要なアクターを保持
+	std::list<std::shared_ptr<Actor>> actors;
 
 	/* 初期化とシングルトンの準備をする処理に必要なもの: */
 		// 初期化を行えるのをゲームを構築するGameLoopクラスのみに限定する
@@ -49,7 +58,4 @@ private:
 	GameObject(GameObject&&) = delete;
 	GameObject& operator=(const GameObject&) = delete;
 	GameObject& operator=(GameObject&&) = delete;
-
-	// レンダリング処理が必要なアクターを保持
-	std::list<std::shared_ptr<Actor>> actors;
 };

@@ -28,7 +28,7 @@ public:
 	~SpriteMesh() {}
 
 	void init(std::shared_ptr<ShaderResource> shaderResource);
-	void rendering(const TextureResource& textureResource);
+	void rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource);
 private:
 	const int32_t SPRITE_VERTEX_COUNT = 4;
 

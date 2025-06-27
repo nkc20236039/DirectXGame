@@ -64,12 +64,14 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 	system.get_device()->CreateSamplerState(&sampler, samplerState.GetAddressOf());
 }
 
-void SpriteMesh::rendering(const TextureResource& textureResource) {
-	ConstantBuffer constantBuffer = {};
-	constantBuffer.world = DirectX::XMMatrixTranspose(DirectX::XMMatrixIdentity());
-	constantBuffer.view = DirectX::XMMatrixTranspose(DirectX::XMMatrixIdentity());
-	constantBuffer.projection = DirectX::XMMatrixTranspose(DirectX::XMMatrixIdentity());
-	system.get_deviceContext()->UpdateSubresource(system.get_constantBuffer().Get(), 0, nullptr, &constantBuffer, 0, 0);
+void SpriteMesh::rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource) {
+	system.get_deviceContext()->UpdateSubresource(
+		system.get_constantBuffer().Get(),
+		0, 
+		nullptr,
+		&wvp,
+		0,
+		0);
 
 	// サブリソースの更新
 	system.get_deviceContext()->UpdateSubresource(
