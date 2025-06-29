@@ -22,7 +22,7 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> pixelShader = nullptr;
 };
 
-constexpr char STANDARD_PATH_NAME[] = "Standard";
+constexpr char* STANDARD_PATH_NAME = "Standard";
 
 class Shader {
 public:

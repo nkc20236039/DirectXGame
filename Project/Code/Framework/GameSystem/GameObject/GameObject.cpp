@@ -20,7 +20,7 @@ GameObject& GameObject::getInstance() {
 	return *instance;
 }
 
-std::shared_ptr<Camera2D> GameObject::create2DCamera(Transform transform, float zoom = 1.0f) {
+std::shared_ptr<Camera2D> GameObject::create2DCamera(Transform transform, float zoom) {
 	// カメラを作成
 	mainCamera = std::make_unique<Camera2D>(transform, zoom);
 }
@@ -63,7 +63,7 @@ bool GameObject::init(DirectXApplication& app) {
 	// シングルトン用インスタンスが登録されていない場合
 	if (!instance) {
 		// 新しく作成する
-		instance = new GameObject(app);	// 永久生存のため生ポインタで管理()
+		instance = new GameObject(app);	// 永久生存のため生ポインタで管理
 	}
 
 	// 作成したインスタンスへ描画に必要なクラスのポインタを作成
@@ -82,7 +82,7 @@ bool GameObject::init(DirectXApplication& app) {
 	if (!isComplete) { return false; }
 
 	isComplete = instance->spriteRenderer->createStandardSprite(
-		".\\Assets\\Sprite\\ColorfulSprite.png");
+		".\\Assets\\Sprite\\ErrorTexture.png");
 	if (!isComplete) { return false; }
 
 	instance->spriteMesh->init(shaderResource);
