@@ -7,16 +7,19 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 	// シェーダーの情報を保存
 	this->shaderResource = shaderResource;
 
+	vertexList[0].position = { -0.5f, -0.5f, 0.0f };
+	vertexList[1].position = { -0.5f, 0.5f, 0.0f };
+	vertexList[2].position = { 0.5f, -0.5f, 0.0f };
+	vertexList[3].position = { 0.5f, 0.5f, 0.0f };
+
+	vertexList[0].uv = { 0.0f, 1.0f };
+	vertexList[1].uv = { 0.0f, 0.0f };
+	vertexList[2].uv = { 1.0f, 1.0f };
+	vertexList[3].uv = { 1.0f, 0.0f };
+
 	for (int32_t i = 0; i < SPRITE_VERTEX_COUNT; i++) {
-		// 頂点座標
-		vertexList[i].position.x = (i < 2) ? -0.5f : 0.5f;
-		vertexList[i].position.y = ((i % 2) == 0) ? -0.5f : 0.5f;
-		vertexList[i].position.z = 0.0f;
 		// 頂点の色
-		vertexList[i].color = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-		// UV
-		vertexList[i].uv.x = (i < 2) ? 0.0f : 1.0f;
-		vertexList[i].uv.y = ((i % 2) == 0) ? 1.0f : 0.0f;
+		vertexList[i].color = XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f);
 		// ノーマルマップ
 		vertexList[i].normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
 	}
@@ -67,7 +70,7 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 void SpriteMesh::rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource) {
 	system.get_deviceContext()->UpdateSubresource(
 		system.get_constantBuffer().Get(),
-		0, 
+		0,
 		nullptr,
 		&wvp,
 		0,

@@ -3,6 +3,8 @@
 #include "../ApplicationConfig.h"
 #include "SpriteMesh.h"
 
+using namespace DirectX;
+
 DirectXApplication::~DirectXApplication() = default;
 
 bool DirectXApplication::init() {
@@ -18,7 +20,7 @@ bool DirectXApplication::init() {
 		chain.BufferCount = 1;	// バックバッファの数
 		chain.BufferDesc.Width = WINDOW_WIDTH;	// バックバッファの幅
 		chain.BufferDesc.Width = WINDOW_HEIGHT;	// バックバッファの高さ
-		chain.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;	// フォーマット
+		chain.BufferDesc.Format = DXGI_FORMAT_R10G10B10A2_UNORM;	// フォーマット
 		chain.BufferDesc.RefreshRate.Numerator = 60;		// リフレッシュレート
 		chain.BufferDesc.RefreshRate.Denominator = 1;	// リフレッシュレート
 		chain.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;	// 走査線描画
@@ -200,13 +202,12 @@ bool DirectXApplication::init() {
 	return true;
 }
 
-void DirectXApplication::renderBegin(float r, float g, float b, float a) {
-	float color[4] = { r, g, b, a };
-	deviceContext.Get()->ClearRenderTargetView(renderTargetView.Get(), color);
+void DirectXApplication::clearView(XMVECTORF32 color) {
+	deviceContext.Get()->ClearRenderTargetView(renderTargetView.Get(), color.f);
 	deviceContext.Get()->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 }
 
-void DirectXApplication::renderEnd() {
+void DirectXApplication::present() {
 	swapChain->Present(0, 0);
 }
 

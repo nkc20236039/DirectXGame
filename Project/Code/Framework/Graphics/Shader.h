@@ -12,7 +12,7 @@
 #pragma comment(lib, "d3dCompiler.lib")
 
 // ‹ó‚ÌƒpƒX
-#define NULLPATH "NULL"
+const std::string STANDARD_PATH_NAME = "Standard";
 
 struct ShaderResource {
 public:
@@ -22,7 +22,6 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11PixelShader> pixelShader = nullptr;
 };
 
-constexpr char* STANDARD_PATH_NAME = "Standard";
 
 class Shader {
 public:

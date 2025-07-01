@@ -22,7 +22,9 @@ GameObject& GameObject::getInstance() {
 
 std::shared_ptr<Camera2D> GameObject::create2DCamera(Transform transform, float zoom) {
 	// カメラを作成
-	mainCamera = std::make_unique<Camera2D>(transform, zoom);
+	mainCamera = std::make_shared<Camera2D>(transform, zoom);
+
+	return mainCamera;
 }
 
 std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform transform, uint32_t layer) {
@@ -45,6 +47,9 @@ std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform
 }
 
 void GameObject::render() {
+	// ビューのクリア
+	application.clearView(mainCamera->getBackgourndColor().getRawColor());
+
 	for (auto actor : actors) {
 		// オブジェクトの座標をカメラに合わせたworld/view/projection行列に変換
 		XMMATRIX wvp
@@ -56,6 +61,8 @@ void GameObject::render() {
 		// オブジェクトのレンダリング
 		spriteMesh->rendering(wvp, spriteRenderer->getSprite(actor->getSpritePath()));
 	}
+	// 描画の終了処理
+	application.present();
 }
 
 /* インスタンス初期化専用処理 */

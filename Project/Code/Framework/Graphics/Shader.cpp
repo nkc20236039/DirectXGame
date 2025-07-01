@@ -28,7 +28,7 @@ bool Shader::CreateStandardShader(const std::string& vertexShaderPath, const std
 	return true;
 }
 
-const ShaderResource& Shader::GetOrCreateShader(std::string vertexShaderPath = NULLPATH, std::string pixcelShaderPath = NULLPATH) {
+const ShaderResource& Shader::GetOrCreateShader(std::string vertexShaderPath = "", std::string pixcelShaderPath = "") {
 	/* 保存キーのためにファイル名を結合する */
 	// ファイルが存在しない場合はStandardに置き換える
 	std::string vertexShaderName = (std::filesystem::exists(vertexShaderPath)) ? STANDARD_PATH_NAME : vertexShaderPath;

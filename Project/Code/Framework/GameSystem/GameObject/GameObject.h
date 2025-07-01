@@ -27,13 +27,13 @@ public:
 	void render();
 
 private:
-	const DirectXApplication& application;
+	DirectXApplication& application;
 	std::unique_ptr<Shader> shader;
 	std::unique_ptr<SpriteMesh> spriteMesh;
 	std::unique_ptr<SpriteRenderer> spriteRenderer;
 
 	// カメラ
-	std::unique_ptr<Camera2D> mainCamera;
+	std::shared_ptr<Camera2D> mainCamera;
 	// レンダリング処理が必要なアクターを保持
 	std::list<std::shared_ptr<Actor>> actors;
 

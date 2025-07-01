@@ -18,4 +18,8 @@ public:
 		Color::b = std::clamp(b, 0.0f, 1.0f);
 		a = 1;
 	}
+
+	DirectX::XMVECTORF32 getRawColor() {
+		return { r, g, b, a };
+	}
 };

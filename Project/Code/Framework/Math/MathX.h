@@ -1,5 +1,6 @@
 #pragma once
 #include "Struct/Vector2.h"
+#include "Struct/Color.h"
 #include <DirectXMath.h>
 
 class MathX final {

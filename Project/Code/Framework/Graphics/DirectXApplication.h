@@ -17,8 +17,8 @@ public:
 	~DirectXApplication();
 
 	bool init() override;
-	void renderBegin(float r, float g, float b, float a);
-	void renderEnd();
+	void clearView(DirectX::XMVECTORF32 color);
+	void present();
 	void end() override;
 
 	Microsoft::WRL::ComPtr<ID3D11Device> get_device() { return device; }
