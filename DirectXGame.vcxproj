@@ -77,6 +77,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)Project\Framework\Includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,6 +92,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)Project\Framework\Includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,6 +109,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)Project\Framework\Includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -124,6 +128,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)Project\Framework\Includes\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -136,47 +141,47 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Project\Code\Framework\Application.cpp" />
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameLoop.cpp" />
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\GameObject.cpp" />
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.cpp" />
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\Transform.cpp" />
-    <ClCompile Include="Project\Code\Framework\Graphics\DirectXApplication.cpp" />
-    <ClCompile Include="Project\Code\Framework\Graphics\Shader.cpp" />
-    <ClCompile Include="Project\Code\Framework\Graphics\SpriteMesh.cpp" />
-    <ClCompile Include="Project\Code\Framework\Graphics\SpriteRenderer.cpp" />
-    <ClCompile Include="Project\Code\Framework\Math\MathX.cpp" />
-    <ClCompile Include="Project\Code\Framework\Math\Struct\Vector2.cpp" />
-    <ClCompile Include="Project\Code\Framework\SceneSystem\SceneList.cpp" />
-    <ClCompile Include="Project\Code\Framework\SceneSystem\SceneSystem.cpp" />
-    <ClCompile Include="Project\Code\Framework\Utility.cpp" />
-    <ClCompile Include="Project\Code\Main.cpp" />
+    <ClCompile Include="Project\Framework\Code\GameObject\GameObject.cpp" />
+    <ClCompile Include="Project\Framework\Code\GameObject\Objects\Camera2D.cpp" />
+    <ClCompile Include="Project\Framework\Code\GameObject\Transform.cpp" />
+    <ClCompile Include="Project\Framework\Code\Graphics\Shader.cpp" />
+    <ClCompile Include="Project\Framework\Code\Graphics\SpriteMesh.cpp" />
+    <ClCompile Include="Project\Framework\Code\Graphics\SpriteRenderer.cpp" />
+    <ClCompile Include="Project\Framework\Code\Main.cpp" />
     <ClCompile Include="Project\Code\Scene\MockScene.cpp" />
-    <ClCompile Include="Project\Code\Scope\SceneScope.cpp" />
+    <ClCompile Include="Project\Framework\Code\SceneSystem\SceneList.cpp" />
+    <ClCompile Include="Project\Framework\Code\SceneSystem\SceneSystem.cpp" />
+    <ClCompile Include="Project\Framework\Code\System\Application.cpp" />
+    <ClCompile Include="Project\Framework\Code\System\DirectXApplication.cpp" />
+    <ClCompile Include="Project\Framework\Code\System\GameLoop.cpp" />
+    <ClCompile Include="Project\Framework\Code\Utility.cpp" />
+    <ClCompile Include="Project\Framework\UserCode\SceneScope.cpp" />
+    <ClCompile Include="Project\Framework\Code\MathX\MathX.cpp" />
+    <ClCompile Include="Project\Framework\Code\MathX\Struct\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameLoop.h" />
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\IBehavior.h" />
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\GameObject.h" />
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Actor.h" />
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.h" />
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Object.h" />
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Transform.h" />
-    <ClInclude Include="Project\Code\Framework\Graphics\Shader.h" />
-    <ClInclude Include="Project\Code\Framework\Graphics\SpriteMesh.h" />
-    <ClInclude Include="Project\Code\Framework\Graphics\SpriteRenderer.h" />
-    <ClInclude Include="Project\Code\Framework\Math\MathX.h" />
-    <ClInclude Include="Project\Code\Framework\Math\Struct\Color.h" />
-    <ClInclude Include="Project\Code\Framework\Math\Struct\Vector2.h" />
-    <ClInclude Include="Project\Code\Framework\SceneSystem\IScene.h" />
-    <ClInclude Include="Project\Code\Framework\Graphics\DirectXApplication.h" />
-    <ClInclude Include="Project\Code\Framework\Application.h" />
-    <ClInclude Include="Project\Code\Framework\ApplicationConfig.h" />
-    <ClInclude Include="Project\Code\Framework\SceneSystem\SceneList.h" />
-    <ClInclude Include="Project\Code\Framework\SceneSystem\SceneSystem.h" />
-    <ClInclude Include="Project\Code\Framework\Utility.h" />
     <ClInclude Include="Project\Code\Scene\MockScene.h" />
-    <ClInclude Include="Project\Code\Scope\SceneScope.h" />
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneScope.h" />
+    <ClInclude Include="Project\Framework\Includes\GameObject\GameObject.h" />
+    <ClInclude Include="Project\Framework\Includes\GameObject\IBehavior.h" />
+    <ClInclude Include="Project\Framework\Includes\GameObject\Objects\Actor.h" />
+    <ClInclude Include="Project\Framework\Includes\GameObject\Objects\Camera2D.h" />
+    <ClInclude Include="Project\Framework\Includes\GameObject\Objects\Object.h" />
+    <ClInclude Include="Project\Framework\Includes\GameObject\Transform.h" />
+    <ClInclude Include="Project\Framework\Includes\Graphics\Shader.h" />
+    <ClInclude Include="Project\Framework\Includes\Graphics\SpriteMesh.h" />
+    <ClInclude Include="Project\Framework\Includes\Graphics\SpriteRenderer.h" />
+    <ClInclude Include="Project\Framework\Includes\Math\MathX.h" />
+    <ClInclude Include="Project\Framework\Includes\Math\Struct\Color.h" />
+    <ClInclude Include="Project\Framework\Includes\Math\Struct\Vector2.h" />
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\IScene.h" />
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneList.h" />
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneSystem.h" />
+    <ClInclude Include="Project\Framework\Includes\System\Application.h" />
+    <ClInclude Include="Project\Framework\Includes\System\DirectXApplication.h" />
+    <ClInclude Include="Project\Framework\Includes\System\GameLoop.h" />
+    <ClInclude Include="Project\Framework\Includes\Utility.h" />
+    <ClInclude Include="Project\Framework\UserCode\ApplicationConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,5 +1,7 @@
 #pragma once
-#include "../Framework/SceneSystem/IScene.h"
+#include "SceneSystem/IScene.h"
+
+using namespace UtX;
 
 class MockScene : public IScene {
 	// IScene ‚ğ‰î‚µ‚ÄŒp³‚³‚ê‚Ü‚µ‚½
