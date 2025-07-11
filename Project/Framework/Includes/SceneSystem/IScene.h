@@ -4,9 +4,9 @@ namespace UtX {
 	class IScene {
 	public:
 		virtual ~IScene() = default;
-		virtual void init() const = 0;
-		virtual void enter() const = 0;
-		virtual void update() const = 0;
-		virtual void exit() const = 0;
+		virtual void init() = 0;
+		virtual void enter() = 0;
+		virtual void update() = 0;
+		virtual void exit() = 0;
 	};
 }

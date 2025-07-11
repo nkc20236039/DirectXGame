@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <array>
 
 #include "Graphics/Shader.h"
 #include "Graphics/SpriteRenderer.h"
@@ -31,13 +32,13 @@ namespace UtX {
 		~SpriteMesh() {}
 
 		void init(std::shared_ptr<ShaderResource> shaderResource);
-		void rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource);
+		void rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource, std::array<Vertex, 4>& vertex);
 	private:
 		const int32_t SPRITE_VERTEX_COUNT = 4;
 
 		DirectXApplication& system;
 		std::shared_ptr<ShaderResource> shaderResource;
 		Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
-		Vertex vertexList[4] = {};
+		std::array<Vertex, 4> standardVertexList = {};
 	};
 }

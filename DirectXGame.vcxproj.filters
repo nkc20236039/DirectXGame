@@ -15,123 +15,132 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Project\Code\Main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Application.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Graphics\DirectXApplication.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\SceneSystem\SceneList.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Scope\SceneScope.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Graphics\SpriteRenderer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Graphics\Shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Graphics\SpriteMesh.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameLoop.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Project\Code\Framework\SceneSystem\SceneSystem.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Code\Scene\MockScene.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\GameObject.cpp">
+    <ClCompile Include="Project\Framework\Code\GameObject\GameObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.cpp">
+    <ClCompile Include="Project\Framework\Code\GameObject\Objects\Camera2D.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Math\Struct\Vector2.cpp">
+    <ClCompile Include="Project\Framework\Code\GameObject\Transform.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\GameSystem\GameObject\Transform.cpp">
+    <ClCompile Include="Project\Framework\Code\Graphics\Shader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Utility.cpp">
+    <ClCompile Include="Project\Framework\Code\Graphics\SpriteMesh.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Project\Code\Framework\Math\MathX.cpp">
+    <ClCompile Include="Project\Framework\Code\Graphics\SpriteRenderer.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\Main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\SceneSystem\SceneList.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\SceneSystem\SceneSystem.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\System\Application.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\System\DirectXApplication.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\System\GameLoop.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\Utility.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\UserCode\SceneScope.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\MathX\MathX.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\MathX\Struct\Vector2.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Framework\Code\GameObject\Objects\Actor.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Code\Actors\Player.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Project\Code\Framework\Application.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\ApplicationConfig.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Graphics\DirectXApplication.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\SceneSystem\SceneList.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Scope\SceneScope.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\SceneSystem\IScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameLoop.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Graphics\SpriteRenderer.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Graphics\SpriteMesh.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Graphics\Shader.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\GameObject.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Math\Struct\Vector2.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Project\Code\Framework\SceneSystem\SceneSystem.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Project\Code\Scene\MockScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Math\MathX.h">
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneScope.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\IBehavior.h">
+    <ClInclude Include="Project\Framework\Includes\GameObject\GameObject.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Object.h">
+    <ClInclude Include="Project\Framework\Includes\GameObject\IBehavior.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Actor.h">
+    <ClInclude Include="Project\Framework\Includes\GameObject\Objects\Actor.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Objects\Camera2D.h">
+    <ClInclude Include="Project\Framework\Includes\GameObject\Objects\Camera2D.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\GameSystem\GameObject\Transform.h">
+    <ClInclude Include="Project\Framework\Includes\GameObject\Objects\Object.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Utility.h">
+    <ClInclude Include="Project\Framework\Includes\GameObject\Transform.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Project\Code\Framework\Math\Struct\Color.h">
+    <ClInclude Include="Project\Framework\Includes\Graphics\Shader.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\Graphics\SpriteMesh.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\Graphics\SpriteRenderer.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\Math\MathX.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\Math\Struct\Color.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\Math\Struct\Vector2.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\IScene.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneList.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneSystem.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\System\Application.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\System\DirectXApplication.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\System\GameLoop.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\Includes\Utility.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Framework\UserCode\ApplicationConfig.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Code\Actors\Player.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -139,7 +148,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Downloads\ColorfulSprite.png">
+    <Image Include="Assets\Sprite\ColorfulSprite.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\Sprite\DirectX.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\Sprite\ErrorTexture.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\Sprite\GBackTex.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\Sprite\MyChar.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="Assets\Sprite\MyShot.png">
       <Filter>リソース ファイル</Filter>
     </Image>
   </ItemGroup>

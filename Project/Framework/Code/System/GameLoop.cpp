@@ -30,6 +30,8 @@ bool GameLoop::init(DirectXApplication& graphicApp) {
 void GameLoop::update() {
 	// シーンの更新
 	SceneSystem::getInstance().getCurrentScene().update();
+	// オブジェクトの振る舞い更新
+	GameObject::getInstance().update();
 	// 全オブジェクトの描画
 	GameObject::getInstance().render();
 }

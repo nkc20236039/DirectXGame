@@ -26,6 +26,9 @@ namespace UtX {
 		// UI作成
 		// std::shared_ptr<UI> createUI();
 
+		// 更新
+		void update();
+
 		// レンダリング
 		void render();
 
@@ -41,7 +44,7 @@ namespace UtX {
 		std::list<std::shared_ptr<Actor>> actors;
 
 		/* 初期化とシングルトンの準備をする処理に必要なもの: */
-			// 初期化を行えるのをゲームを構築するGameLoopクラスのみに限定する
+		// 初期化を行えるのをゲームを構築するGameLoopクラスのみに限定する
 		friend class GameLoop;
 
 		// コンストラクタの呼び出しを禁止

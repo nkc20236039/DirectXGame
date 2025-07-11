@@ -1,4 +1,5 @@
 #include "Graphics/SpriteMesh.h"
+
 #include "../UserCode/ApplicationConfig.h"
 
 using namespace DirectX;
@@ -8,21 +9,21 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 	// シェーダーの情報を保存
 	this->shaderResource = shaderResource;
 
-	vertexList[0].position = { -0.5f, -0.5f, 0.0f };
-	vertexList[1].position = { -0.5f, 0.5f, 0.0f };
-	vertexList[2].position = { 0.5f, -0.5f, 0.0f };
-	vertexList[3].position = { 0.5f, 0.5f, 0.0f };
+	standardVertexList[0].position = { -0.5f, -0.5f, 0.0f };
+	standardVertexList[1].position = { -0.5f, 0.5f, 0.0f };
+	standardVertexList[2].position = { 0.5f, -0.5f, 0.0f };
+	standardVertexList[3].position = { 0.5f, 0.5f, 0.0f };
 
-	vertexList[0].uv = { 0.0f, 1.0f };
-	vertexList[1].uv = { 0.0f, 0.0f };
-	vertexList[2].uv = { 1.0f, 1.0f };
-	vertexList[3].uv = { 1.0f, 0.0f };
+	standardVertexList[0].uv = { 0.0f, 1.0f };
+	standardVertexList[1].uv = { 0.0f, 0.0f };
+	standardVertexList[2].uv = { 1.0f, 1.0f };
+	standardVertexList[3].uv = { 1.0f, 0.0f };
 
 	for (int32_t i = 0; i < SPRITE_VERTEX_COUNT; i++) {
 		// 頂点の色
-		vertexList[i].color = XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f);
+		standardVertexList[i].color = XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f);
 		// ノーマルマップ
-		vertexList[i].normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
+		standardVertexList[i].normal = XMFLOAT3(0.0f, 0.0f, 1.0f);
 	}
 
 	// バッファを設定
@@ -34,7 +35,7 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 
 	// サブリソースを設定
 	D3D11_SUBRESOURCE_DATA subResourceData = {};
-	subResourceData.pSysMem = vertexList;	// 初期化データへのポインタ
+	subResourceData.pSysMem = standardVertexList.data();	// 初期化データへのポインタ
 	subResourceData.SysMemPitch = 0;		// テクスチャにあるラインの距離
 	subResourceData.SysMemSlicePitch = 0;	// 3Dテクスチャに関する値
 	system.get_device()->CreateBuffer(
@@ -68,7 +69,17 @@ void SpriteMesh::init(std::shared_ptr<ShaderResource> shaderResource) {
 	system.get_device()->CreateSamplerState(&sampler, samplerState.GetAddressOf());
 }
 
-void SpriteMesh::rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource) {
+void SpriteMesh::rendering(const DirectX::XMMATRIX& wvp, const TextureResource& textureResource, std::array<Vertex, 4>& vertex) {
+	// スプライトの幅/高さの半分を取得
+	float width = textureResource.metadata.width * 0.5f;
+	float height = textureResource.metadata.height * 0.5f;
+
+	// 幅/高さをメッシュに適用
+	vertex[0].position = { -width, -height, 0.0f };
+	vertex[1].position = { -width, height, 0.0f };
+	vertex[2].position = { width, -height, 0.0f };
+	vertex[3].position = { width, height, 0.0f };
+	
 	system.get_deviceContext()->UpdateSubresource(
 		system.get_constantBuffer().Get(),
 		0,
@@ -82,7 +93,7 @@ void SpriteMesh::rendering(const DirectX::XMMATRIX& wvp, const TextureResource& 
 		shaderResource->vertexBuffer.Get(),
 		0,
 		nullptr,
-		vertexList,
+		vertex.data(),
 		0,
 		0);
 	// 入力アセンブラステージに入力レイアウトオブジェクトをバインド

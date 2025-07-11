@@ -17,6 +17,7 @@ GameObject& GameObject::getInstance() {
 	// インスタンスが存在しないか初期化がされていない場合
 	if (!instance || !instance->isInitialized) {
 		// エラーを出力
+		// TODO:: エラー処理クラスに移動
 		throw "[GameObject]は初期化されていません";
 	}
 
@@ -49,6 +50,15 @@ std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform
 	return newActor;
 }
 
+void GameObject::update() {
+	// 各アクターの更新処理を呼び出し
+	for (auto actor : actors) {
+		for (auto behavior : actor->GetBehavior()) {
+			behavior->Update();
+		}
+	}
+}
+
 void GameObject::render() {
 	// ビューのクリア
 	application.clearView(mainCamera->getBackgourndColor().getRawColor());
@@ -62,7 +72,7 @@ void GameObject::render() {
 			* mainCamera->getCameraMatrix();
 
 		// オブジェクトのレンダリング
-		spriteMesh->rendering(wvp, spriteRenderer->getSprite(actor->getSpritePath()));
+		spriteMesh->rendering(wvp, spriteRenderer->getSprite(actor->getSpritePath()), actor->getVertexList());
 	}
 	// 描画の終了処理
 	application.present();

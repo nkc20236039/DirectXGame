@@ -1,12 +1,24 @@
 #pragma once
+
+#include <memory>
+
 #include "SceneSystem/IScene.h"
+#include "GameObject/Objects/Actor.h"
+#include "../../Code/Actors/Player.h"
 
-using namespace UtX;
+class MockScene : public UtX::IScene {
+public:
+	MockScene() :time(0.0f), vertexList{} {}
+	~MockScene() = default;
 
-class MockScene : public IScene {
 	// IScene ÇâÓÇµÇƒåpè≥Ç≥ÇÍÇ‹ÇµÇΩ
-	void init() const override;
-	void enter() const override;
-	void update() const override;
-	void exit() const override;
+	void init() override;
+	void enter() override;
+	void update() override;
+	void exit() override;
+private:
+	float time;
+	std::shared_ptr<Player> player;
+	std::shared_ptr<UtX::Actor> backGround;
+	std::array<UtX::Vertex, 4> vertexList;
 };

@@ -9,10 +9,21 @@ namespace UtX {
 
 		float x;
 		float y;
-	};
 
-	const Vector2 zero = Vector2(0, 0);
-	const Vector2 one = Vector2(1, 1);
-	const Vector2 right = Vector2(1, 0);
-	const Vector2 up = Vector2(0, 1);
+		float Length();
+		Vector2 Normalize();
+
+		static const Vector2 zero;
+		static const Vector2 one;
+		static const Vector2 right;
+		static const Vector2 up;
+
+		bool operator==(const Vector2& other) const {
+			return (x == other.x) && (y == other.y);
+		}
+
+		bool operator!=(const Vector2& other) const {
+			return (x != other.x) || (y != other.y);
+		}
+	};
 }
