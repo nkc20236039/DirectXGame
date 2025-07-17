@@ -75,11 +75,11 @@ void SpriteMesh::rendering(const DirectX::XMMATRIX& wvp, const TextureResource& 
 	float height = textureResource.metadata.height * 0.5f;
 
 	// 幅/高さをメッシュに適用
-	vertex[0].position = { -width, -height, 0.0f };
+	/*vertex[0].position = { -width, -height, 0.0f };
 	vertex[1].position = { -width, height, 0.0f };
 	vertex[2].position = { width, -height, 0.0f };
-	vertex[3].position = { width, height, 0.0f };
-	
+	vertex[3].position = { width, height, 0.0f };*/
+
 	system.get_deviceContext()->UpdateSubresource(
 		system.get_constantBuffer().Get(),
 		0,

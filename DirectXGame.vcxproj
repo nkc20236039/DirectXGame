@@ -141,6 +141,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Project\Code\Actors\BackGround.cpp" />
     <ClCompile Include="Project\Code\Actors\Player.cpp" />
     <ClCompile Include="Project\Framework\Code\GameObject\GameObject.cpp" />
     <ClCompile Include="Project\Framework\Code\GameObject\Objects\Actor.cpp" />
@@ -162,6 +164,8 @@
     <ClCompile Include="Project\Framework\Code\MathX\Struct\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Project\Code\Actors\BackGround.h" />
+    <ClInclude Include="Project\Code\Actors\Bullet.h" />
     <ClInclude Include="Project\Code\Actors\Player.h" />
     <ClInclude Include="Project\Code\Scene\MockScene.h" />
     <ClInclude Include="Project\Framework\Includes\SceneSystem\SceneScope.h" />

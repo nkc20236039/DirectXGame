@@ -39,7 +39,7 @@ std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform
 	std::list<std::shared_ptr<Actor>>::iterator actorIterator;
 	for (actorIterator = actors.begin(); actorIterator != actors.end(); actorIterator++) {
 		// レイヤーの優先度が指定された優先度になるまで走査する
-		if (layer < actorIterator->get()->getLayer()) {
+		if (layer < (*actorIterator)->getLayer()) {
 			break;	// 見つかった部分でループを抜け、現在のiteratorの部分にあとで挿入する
 		}
 	}
@@ -51,11 +51,22 @@ std::shared_ptr<Actor> GameObject::createActor(std::string spritePath, Transform
 }
 
 void GameObject::update() {
+	// アクターがいない場合は何もしない
+	if (actors.empty()) { return; }
+
 	// 各アクターの更新処理を呼び出し
-	for (auto actor : actors) {
-		for (auto behavior : actor->GetBehavior()) {
+	for (auto actor = actors.begin(); actor != actors.end();) {
+		for (auto behavior : (*actor)->GetBehavior()) {
 			behavior->Update();
 		}
+
+		// アクターを管理しているクラスがリストだけだった場合
+		if (actor->use_count() == 1) {
+			actor = actors.erase(actor);	// アクターを削除
+			continue;
+		}
+
+		actor++;
 	}
 }
 

@@ -5,17 +5,17 @@ using namespace UtX;
 void Player::Update(float deltaTime) {
 	Vector2 input = Vector2::zero;
 	// 入力チェック
-	if (GetAsyncKeyState(VK_UP) & 0x8000) {		// 上
+	if (GetAsyncKeyState(VK_UP) & 0x8000 || GetAsyncKeyState('W') & 0x8000) {		// 上
 		input.y = 1.0f;
 	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {	// 下
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000 || GetAsyncKeyState('S') & 0x8000) {	// 下
 		input.y = -1.0f;
 	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {	// 右
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000 || GetAsyncKeyState('D') & 0x8000) {	// 右
 		uv.y = 1;
 		input.x = 1.0f;
 	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000) {	// 左
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000 || GetAsyncKeyState('A') & 0x8000) {	// 左
 		uv.y = 2;
 		input.x = -1.0f;
 	}
@@ -45,7 +45,7 @@ void Player::Update(float deltaTime) {
 	std::array<Vertex, 4> playerVertexList = vertexList;
 
 	if (animationTime <= time) {
-		uv.x = (int)(uv.x + 1) % 4;
+		uv.x = (float)(((int)uv.x + 1) % 4);
 
 		time = 0.0f;
 	}
@@ -53,6 +53,7 @@ void Player::Update(float deltaTime) {
 	float uvX = uvSplit.x * uv.x;
 	float uvY = uvSplit.y * uv.y;
 
+	// アニメーションのUVを適用
 	playerVertexList[0].uv = { uvX, uvY + uvSplit.y };
 	playerVertexList[1].uv = { uvX, uvY };
 	playerVertexList[2].uv = { uvX + uvSplit.x, uvY + uvSplit.y };
